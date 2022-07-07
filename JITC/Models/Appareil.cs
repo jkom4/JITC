@@ -6,9 +6,9 @@ namespace JITC.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Nom { get; set; }
+        public string? Nom { get; set; }
         [MaxLength(50)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         public int Capacite_Cab { get; set; }
@@ -16,9 +16,9 @@ namespace JITC.Models
         [Required]
         public float Vitesse { get; set; }
 
-        [Required]
+            
         [MaxLength(50)]
-        public string Moteur { get; set; }
+        public string? Moteur { get; set; }
         public bool Statut { get; set; }
 
     }
