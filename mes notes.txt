@@ -1,0 +1,5 @@
+Notes pour dev WEB
+1- Login 
+	J'ai utilisé le framework identity qui s'occupe des logs. J'ai du rajouté les elements dans les tables génerés
+automatiquement grâce a ma classe ApplicationUser qui implemente IdentityUser.
+J'ai ensuite ajouté les classes générés automatiquement pour pouvoir customiser les classes auto (dossier Areas)
