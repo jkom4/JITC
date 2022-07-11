@@ -135,6 +135,7 @@ namespace JITC.Models
                     UserId = "4"
                 }
             );
+ 
 
             //Appareils
             modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 1, Nom = "Eurocopter AS 355 F1/F2 Ecureuil III", Description = "", Capacite_Cab = 5, Vitesse = 220, Moteur = "deux turbines du modèle de Rolls Royce 250-C20F", Statut = false });
@@ -142,12 +143,14 @@ namespace JITC.Models
             modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 3, Nom = "Robinson R44 Raven II", Description = "", Capacite_Cab = 3, Vitesse = 190, Moteur = "un piston du type Lycoming modèle IO-540", Statut = false });
 
 
+            modelBuilder.Entity<Vol>().HasOne(p => p.AeroportDepart).WithMany(b => b.Vols).OnDelete(DeleteBehavior.Restrict);
         }
 
          
 
         public DbSet<Aeroport> Aeroport { get; set; }
         public DbSet<Appareil> Appareil { get; set; }
+        public DbSet<Vol> Vol { get; set; }
         
 
     }

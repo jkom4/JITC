@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JITC.Migrations
 {
     [DbContext(typeof(JITCDbContext))]
-    [Migration("20220707193221_Appareil_data")]
-    partial class Appareil_data
+    [Migration("20220711212236_arrive")]
+    partial class arrive
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,7 +230,7 @@ namespace JITC.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "fea222e4-2cfd-4724-af3c-9c92f957bf1b",
+                            ConcurrencyStamp = "2fe748b4-a0e1-49c4-9fec-33c0e41602bc",
                             Email = "M.Ney@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Mo",
@@ -238,9 +238,9 @@ namespace JITC.Migrations
                             Name = "Ney",
                             NormalizedEmail = "M.NEY@JITC.COM",
                             NormalizedUserName = "MONEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOmtIK678svYWBpBOkBzqlgeJtS+1evPmydPYWVIQUQReDcpIlViPCgkoX2UrLsfBQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ5fN9AQXMykiTYZ8Waaw8ZXhFbCvR4K84AXlW3/qcqK8mFtJn/4moqJT6j9AqbrMQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "706b3b2a-d655-4297-8125-dab799bf6e75",
+                            SecurityStamp = "7dede700-d8cd-41d8-9839-a5b1218beea7",
                             TwoFactorEnabled = false,
                             UserName = "MoNey"
                         },
@@ -249,7 +249,7 @@ namespace JITC.Migrations
                             Id = "2",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "2cd6e08f-714b-4b6b-8c1d-9a1103b04dbc",
+                            ConcurrencyStamp = "86f6aa45-c9b1-4265-bda9-baea0a471507",
                             Email = "D.Balav@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Daniele",
@@ -257,9 +257,9 @@ namespace JITC.Migrations
                             Name = "Balav",
                             NormalizedEmail = "D.BALAV@JITC.COM",
                             NormalizedUserName = "DANIELEBALAV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM4XFMJQTEw0Yzi4pDvtDL3hH77CPMqQBjOZW0yxYwjwAKA2YJem2lrJgK2//zhImg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA/7UkoK7zmUFl85aaI2lMCUNeyo9uyTMbBzmgcu77q+bb0ZM8YkIX9bhUymYXIang==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7dca8d29-2868-45da-96d2-f789e440d9c2",
+                            SecurityStamp = "57ccc8e3-37b6-4d2a-ac34-62f2d35a5b24",
                             TwoFactorEnabled = false,
                             UserName = "DanieleBalav"
                         },
@@ -268,7 +268,7 @@ namespace JITC.Migrations
                             Id = "3",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "c6c4f3fd-6141-4b6c-9f83-f11e21d251e9",
+                            ConcurrencyStamp = "a69b4ff3-b119-42e7-8f44-159900781cce",
                             Email = "T.Sabine@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Thierry",
@@ -276,9 +276,9 @@ namespace JITC.Migrations
                             Name = "Sabine",
                             NormalizedEmail = "T.SABINE@JITC.COM",
                             NormalizedUserName = "THIERRYSABINE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKKCWURZe9lnYRpxLlLwHhvFLJ1tymnldPzkFvOFlXW6Lia4aBbO/sIq3MSgcEZZXA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKDfd32NMaxiledkFHjX0eBjZGEh4jYkyV+Lh09WfIWBPbfz1eaFdhY1W8zBFW/pcQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "425c5a30-fc6b-4cd8-a562-acc6ea51d2a9",
+                            SecurityStamp = "6216e06a-6788-4341-85fa-8620fcd162dc",
                             TwoFactorEnabled = false,
                             UserName = "ThierrySabine"
                         },
@@ -287,7 +287,7 @@ namespace JITC.Migrations
                             Id = "4",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "43544d20-0854-4e42-9007-fdcb2e5fc91c",
+                            ConcurrencyStamp = "87ef9391-ff88-4164-be44-2eb9ae68a4b1",
                             Email = "E.Coptere@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Eli",
@@ -295,12 +295,72 @@ namespace JITC.Migrations
                             Name = "Copetre",
                             NormalizedEmail = "E.COPTERE@JITC.COM",
                             NormalizedUserName = "ELICOPTERE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBwWuKUGt4HESSopkXDyzsryi6kBZgSxSNZDd1j11IpAp+BCCufs4KGG8RR12mccDg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGDjgREbQqp5gn/O7/H02+LD92PU8jr7xy94zGHJ8+x5phHHA4370cFAhkbsVs2WCw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f101a6e0-6c37-4cb2-a0a7-48d5dd379b27",
+                            SecurityStamp = "ca83de9e-12ba-4c63-940e-51aa2b89f37f",
                             TwoFactorEnabled = false,
                             UserName = "EliCoptere"
                         });
+                });
+
+            modelBuilder.Entity("JITC.Models.Vol", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AeroportArriveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AeroportDepartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppareilId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Distance")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("HeureArrivePrevue")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("HeureArriveReelle")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("HeureDepartPrevue")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("HeureDepartReelle")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NombrePlace")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PiloteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Raison")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Recurrence")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Retard")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AeroportArriveId");
+
+                    b.HasIndex("AeroportDepartId");
+
+                    b.HasIndex("AppareilId");
+
+                    b.HasIndex("PiloteId");
+
+                    b.ToTable("Vol");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -333,14 +393,14 @@ namespace JITC.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "9a131796-191e-47c9-8e6e-462b1a957542",
+                            ConcurrencyStamp = "a002f7b0-5a05-41d8-82c5-ad8d7027ae35",
                             Name = "Responsable",
                             NormalizedName = "RESPONSABLE"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "8cf6a114-1cc1-40f6-a40a-f6c4ee980cb2",
+                            ConcurrencyStamp = "11c67c02-1b2d-443e-8aeb-a080a0df22bf",
                             Name = "Pilote",
                             NormalizedName = "PILOTE"
                         });
@@ -474,6 +534,39 @@ namespace JITC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("JITC.Models.Vol", b =>
+                {
+                    b.HasOne("JITC.Models.Aeroport", "AeroportArrive")
+                        .WithMany()
+                        .HasForeignKey("AeroportArriveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JITC.Models.Aeroport", "AeroportDepart")
+                        .WithMany("Vols")
+                        .HasForeignKey("AeroportDepartId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("JITC.Models.Appareil", "Appareil")
+                        .WithMany()
+                        .HasForeignKey("AppareilId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JITC.Models.ApplicationUser", "Pilote")
+                        .WithMany()
+                        .HasForeignKey("PiloteId");
+
+                    b.Navigation("AeroportArrive");
+
+                    b.Navigation("AeroportDepart");
+
+                    b.Navigation("Appareil");
+
+                    b.Navigation("Pilote");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -523,6 +616,11 @@ namespace JITC.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("JITC.Models.Aeroport", b =>
+                {
+                    b.Navigation("Vols");
                 });
 #pragma warning restore 612, 618
         }
