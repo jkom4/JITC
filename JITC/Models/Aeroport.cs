@@ -7,8 +7,7 @@ namespace JITC.Models
         [Required]
         [MaxLength(50)]
         public string Nom { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
-        public List<Vol> Vols { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

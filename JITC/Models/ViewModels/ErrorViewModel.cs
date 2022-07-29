@@ -1,4 +1,4 @@
-namespace JITC.Models
+namespace JITC.Models.ViewModels
 {
     public class ErrorViewModel
     {

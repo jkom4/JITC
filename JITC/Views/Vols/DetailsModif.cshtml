@@ -1,0 +1,107 @@
+﻿@using System.Text.Json
+@using JITC.Models.ViewModels
+@model JITC.Models.ModifVol
+
+@{
+    ViewData["Title"] = "DetailsModif";
+}
+
+<h1>DetailsModif</h1>
+
+<div>
+    <table class="table">
+    <thead>
+        <tr>
+             <th>
+                @Html.DisplayName("Id Vol")
+            </th>
+            <th>
+                @Html.DisplayName("Depart")
+            </th>
+            <th>
+                @Html.DisplayName("Arrive")
+            </th>
+            <th>
+                @Html.DisplayName("DepartPrevue")
+            </th>
+            <th>
+                @Html.DisplayName("ArrivePrevue")
+            </th>
+            <th>
+                @Html.DisplayName("Nombre de place")
+            </th>
+           
+            <th>
+                @Html.DisplayName("Pilote")
+            </th>
+            
+            <th>
+                @Html.DisplayName("Appareil")
+            </th>
+            <th>
+                @Html.DisplayName("Recurrence")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item0 in Model.VolModifs) {
+                 var item = JsonSerializer.Deserialize<VolViewModel>(item0);
+                <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Vols.FirstOrDefault().Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Depart.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrive.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartPrevue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivePrevue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombrePlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pilote.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appareil.Nom)
+            </td>
+            <td>
+                  @{
+                switch (item.Recurrence )
+                {
+                    case 0 : <p>Tous les jours </p>;
+                            break;
+                    case 1 : <p>Tous les lundis </p>;
+                            break;
+                    case 2 : <p>Tous les mardis </p>;
+                            break;
+                    case 3 : <p>Tous les mercredis </p>;
+                            break;
+                    case 4 : <p>Tous les jeudis </p>;
+                            break;
+                    case 5 : <p>Tous les vendredis </p>;
+                            break;
+                    case 6 : <p>Tous les samedis </p>;
+                            break;
+                    case 7 : <p>Tous les dimanches </p>;
+                            break;;
+                }
+                         
+                    }
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+<div>|
+    <a asp-action="Index">Back to List</a>
+</div>

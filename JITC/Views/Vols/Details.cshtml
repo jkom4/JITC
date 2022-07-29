@@ -1,0 +1,119 @@
+﻿@model JITC.Models.Vol
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Vol</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AeroportDepart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AeroportDepart.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AeroportArrive)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AeroportArrive.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombrePlace)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombrePlace)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureDepartPrevue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureDepartPrevue)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureArrivePrevue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureArrivePrevue)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureDepartReelle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureDepartReelle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureArriveReelle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureArriveReelle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pilote)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pilote.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Distance )
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Distance  )
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Appareil)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Appareil.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Recurrence)
+        </dt>
+        <dd class = "col-sm-10">
+            @*Html.DisplayFor(model => model.Recurrence)*@
+            @{
+                switch (Model.Recurrence)
+                {
+                    case 0 : <p>Tous les jours </p>;
+                            break;
+                    case 1 : <p>Tous les lundis </p>;
+                            break;
+                    case 2 : <p>Tous les mardis </p>;
+                            break;
+                    case 3 : <p>Tous les mercredis </p>;
+                            break;
+                    case 4 : <p>Tous les jeudis </p>;
+                            break;
+                    case 5 : <p>Tous les vendredis </p>;
+                            break;
+                    case 6 : <p>Tous les samedis </p>;
+                            break;
+                    case 7 : <p>Tous les dimanches </p>;
+                            break;;
+                }
+                         
+                    }
+            
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Retard)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Retard)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Raison)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Raison)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

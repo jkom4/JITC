@@ -1,0 +1,68 @@
+﻿@model IEnumerable<JITC.Models.Vol>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AeroportDepart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AeroportArrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureDepartPrevue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureArrivePrevue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilote)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Appareil)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AeroportDepart.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AeroportArrive.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeureDepartPrevue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeureArrivePrevue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pilote.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appareil.Nom)
+            </td>
+          
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="EditByPilote" asp-route-id="@item.Id">EditP</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

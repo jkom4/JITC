@@ -1,0 +1,52 @@
+﻿@model IEnumerable<JITC.Models.ModifVol>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action ="Index" asp-route-sortOrder="Id">
+                @Html.DisplayNameFor(model => model.Id)
+                </a>
+            </th>
+             <th>
+                <a asp-action ="Index" asp-route-sortOrder="Id">
+                @Html.DisplayName("ID vol")
+                </a>
+            </th>
+
+            <th>
+                <a asp-action ="Index" asp-route-sortOrder="Nombre">
+                @Html.DisplayName("Nombre de Modification")
+                </a>
+            </th>
+        
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vols.FirstOrDefault().Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolModifs.Count)
+            </td>
+            <td>
+                <a asp-action="DetailsModif" asp-route-id="@item.Id">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

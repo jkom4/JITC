@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using JITC.Models;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace JITC.Models
 {
@@ -30,10 +33,10 @@ namespace JITC.Models
             modelBuilder.Entity<ApplicationUser>().HasIndex(u => u.UserName).IsUnique();
 
             //Aeroport 
-            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 1, Nom = "Liège" });
-            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 2, Nom = "Bruxelles" });
-            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 3, Nom = "Oostende" });
-            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 4, Nom = "Charleroi" });
+            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 1, Nom = "Liège", Latitude = 50.63583079 , Longitude = 5.439331576 });
+            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 2, Nom = "Bruxelles" , Latitude = 50.90082973, Longitude = 4.483998064 });
+            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 3, Nom = "Oostende", Latitude = 51.193165894 , Longitude = 2.858163234 });
+            modelBuilder.Entity<Aeroport>().HasData(new Aeroport() { Id = 4, Nom = "Charleroi", Latitude = 50.455998176 , Longitude = 4.45166486 });
 
             
             //Rôles
@@ -141,9 +144,13 @@ namespace JITC.Models
             modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 1, Nom = "Eurocopter AS 355 F1/F2 Ecureuil III", Description = "", Capacite_Cab = 5, Vitesse = 220, Moteur = "deux turbines du modèle de Rolls Royce 250-C20F", Statut = false });
             modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 2, Nom = "Bell 206 JetRanger", Description = "", Capacite_Cab = 4, Vitesse = 190, Moteur = "une turbine du type Rolls Royce 250-C20B", Statut = false });
             modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 3, Nom = "Robinson R44 Raven II", Description = "", Capacite_Cab = 3, Vitesse = 190, Moteur = "un piston du type Lycoming modèle IO-540", Statut = false });
+    
+            modelBuilder.Entity<Vol>().HasOne(v => v.ModifVol).WithMany(m => m.Vols);
+            modelBuilder.Entity<ModifVol>().Property(m => m.VolModifs)
+    .HasConversion(
+        v => JsonConvert.SerializeObject(v),
+        v => JsonConvert.DeserializeObject<List<string>>(v));
 
-
-            modelBuilder.Entity<Vol>().HasOne(p => p.AeroportDepart).WithMany(b => b.Vols).OnDelete(DeleteBehavior.Restrict);
         }
 
          
@@ -151,7 +158,9 @@ namespace JITC.Models
         public DbSet<Aeroport> Aeroport { get; set; }
         public DbSet<Appareil> Appareil { get; set; }
         public DbSet<Vol> Vol { get; set; }
+        public DbSet<JITC.Models.ModifVol>? ModifVol { get; set; }
         
+
 
     }
 
