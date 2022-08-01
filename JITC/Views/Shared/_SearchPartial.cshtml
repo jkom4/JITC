@@ -1,18 +1,47 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model JITC.Models.ViewModels.SearchViewModel
 @{
+    var Model = new JITC.Models.ViewModels.SearchViewModel();
+
   <div class="row g-3 ">
+  <form asp-controller="Vols" asp-action="Index"  enctype="multipart/form-data">
     <div class="col form-floating">
-        <input type="text" class="form-control"  id="floatingInputDepart" placeholder="Départ">
-        <label for="floatingInputDepart">Départ</label>
+    
+        <select asp-for="DepartId"  asp-name="DepartId" class="form-control" placeholder="Départ">
+                        <option value="1" selected>Select Aeroport</option>
+                        @{
+                        if (ViewBag.Aeroport != null)
+                        {
+                            foreach (var item in ViewBag.Aeroport)
+                            {
+                                        <option value="@item.Id">@item.Nom</option>
+                            }
+                        }
+                        }
+                    </select>
+        <label for="DepartId">Départ</label>
     </div>
     <div class="col form-floating">
-        <input type="text" class="form-control" id="floatingInputArrive" placeholder="Destination" >
-        <label for="floatingInputArrive">Destination</label>
-    </div>
-    <div class="col">
-    <button type="submit" class="btn btn-primary">Rechercher</button>
-  </div>
+        <select asp-for="ArriveId" name="ArriveId" class="form-control" placeholder="Destination">
+                        <option value="2"   selected>Select Aeroport</option>
+                        @{
+                        if (ViewBag.Aeroport != null)
+                        {
+                            foreach (var item in ViewBag.Aeroport)
+                            {
+                                        <option value="@item.Id">@item.Nom</option>
+                            }
+                        }
+                        }
+                    </select>
+        <label for="ArriveId">Destination</label>
+     </div
+            <div class="form-group">
+                <input asp-for="DepartDate" type="date" class="form-control"  placeholder="Date" required/>
+                <span asp-validation-for="DepartDate" class="text-danger"></span>
+            </div>
+        <div class="col">
+            <button  type ="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </form>
   </div>
 }

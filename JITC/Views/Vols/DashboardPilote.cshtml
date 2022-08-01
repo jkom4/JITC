@@ -56,17 +56,21 @@
                 @Html.DisplayFor(modelItem => item.Appareil.Nom)
             </td>
           
-            <td>
-                    @{
-                        if (!(User.IsInRole("Pilote")) && !(User.IsInRole("Responsable")))
-                        { 
-                                 <a asp-controller="Reservations" asp-action="Create" asp-route-id="@item.Id">Reserver</a>
+                <td>@{
+                        if (item.HeureArriveReelle == null)
+                        {
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                         }
-                    }
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="EditByPilote" asp-route-id="@item.Id">EditP</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        else
+                        {
+                            <a asp-action="EditByPilote" asp-route-id="@item.Id">Gerer</a> 
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        }
+
+                
+                }
+                
+                
             </td>
         </tr>
 }

@@ -1,0 +1,53 @@
+﻿@model JITC.Models.ViewModels.VolViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vol)
+            </th>
+            <th>
+                @Html.DisplayName("Heure de départ");
+            </th>
+            <th>
+                @Html.DisplayName("Heure d'arrivée");
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation.place)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Reservations) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vol.AeroportDepart.Nom) - @Html.DisplayFor(modelItem => item.vol.AeroportArrive.Nom)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vol.HeureDepartPrevue )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vol.HeureArrivePrevue )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.place)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details du vol</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Annuler</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

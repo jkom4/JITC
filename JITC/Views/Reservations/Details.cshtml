@@ -1,0 +1,62 @@
+﻿@model JITC.Models.ViewModels.VolViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Depart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Depart.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Arrive)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Appareil.Nom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombrePlace)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombrePlace)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DepartPrevue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DepartPrevue)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ArrivePrevue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ArrivePrevue)
+        </dd>
+        
+       <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Appareil)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Appareil.Nom)
+            @Html.DisplayFor(model => model.Appareil.Moteur)
+        </dd>
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservation.place)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Reservation.place)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

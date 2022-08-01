@@ -19,6 +19,7 @@ namespace JITC.Models
         [MaxLength(50)]
         public string? Name { get; set; }
         public DateTime Birthdate { get; set; }
+        public virtual ICollection<Vol> Vols { get; set; } = new List<Vol>();
     }
     public class JITCDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -141,11 +142,12 @@ namespace JITC.Models
  
 
             //Appareils
-            modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 1, Nom = "Eurocopter AS 355 F1/F2 Ecureuil III", Description = "", Capacite_Cab = 5, Vitesse = 220, Moteur = "deux turbines du modèle de Rolls Royce 250-C20F", Statut = false });
-            modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 2, Nom = "Bell 206 JetRanger", Description = "", Capacite_Cab = 4, Vitesse = 190, Moteur = "une turbine du type Rolls Royce 250-C20B", Statut = false });
-            modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 3, Nom = "Robinson R44 Raven II", Description = "", Capacite_Cab = 3, Vitesse = 190, Moteur = "un piston du type Lycoming modèle IO-540", Statut = false });
+            modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 1, Nom = "Eurocopter AS 355 F1/F2 Ecureuil III", Description = "", Capacite_Cab = 5, Vitesse = 220, Moteur = "Deux turbines du modèle de Rolls Royce 250-C20F", Statut = false });
+            modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 2, Nom = "Bell 206 JetRanger", Description = "", Capacite_Cab = 4, Vitesse = 190, Moteur = "Une turbine du type Rolls Royce 250-C20B", Statut = false });
+            modelBuilder.Entity<Appareil>().HasData(new Appareil() { Id = 3, Nom = "Robinson R44 Raven II", Description = "", Capacite_Cab = 3, Vitesse = 190, Moteur = "Un piston du type Lycoming modèle IO-540", Statut = false });
     
             modelBuilder.Entity<Vol>().HasOne(v => v.ModifVol).WithMany(m => m.Vols);
+            modelBuilder.Entity<Vol>().HasOne(v => v.Appareil).WithMany(a => a.Vols).HasForeignKey(v => v.AppareilId);
             modelBuilder.Entity<ModifVol>().Property(m => m.VolModifs)
     .HasConversion(
         v => JsonConvert.SerializeObject(v),
@@ -159,6 +161,7 @@ namespace JITC.Models
         public DbSet<Appareil> Appareil { get; set; }
         public DbSet<Vol> Vol { get; set; }
         public DbSet<JITC.Models.ModifVol>? ModifVol { get; set; }
+        public DbSet<JITC.Models.Reservation>? Reservation { get; set; }
         
 
 

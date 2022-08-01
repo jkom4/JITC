@@ -3,6 +3,7 @@ namespace JITC.Models
 {
     public class Appareil
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         [MaxLength(50)]
@@ -20,6 +21,11 @@ namespace JITC.Models
         [MaxLength(50)]
         public string? Moteur { get; set; }
         public bool Statut { get; set; }
+
+        public virtual ICollection<Vol> Vols { get; set; } = new List<Vol>();
+
+       
+            
 
     }
 }

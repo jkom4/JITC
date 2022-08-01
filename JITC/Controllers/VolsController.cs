@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JITC.Models.ViewModels;
+using System.Security.Claims;
 
 namespace JITC.Controllers
 {
+    
     public class VolsController : Controller
     {
         private readonly JITCDbContext _context;
@@ -23,10 +25,19 @@ namespace JITC.Controllers
         }
 
         // GET: Vols
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? DepartId, int? ArriveId, DateTime? DepartDate)
         {
-            var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote);
-            return View(await jITCDbContext.ToListAsync());
+            if (DepartId != null && ArriveId != null && DepartDate != null)
+            {
+                var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote)
+                                    .Where(v => v.AeroportDepartId == DepartId && v.AeroportArriveId == ArriveId && v.HeureArrivePrevue.Date == DepartDate);
+                return View(await jITCDbContext.ToListAsync());
+            }
+            else { 
+                var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote);
+                return View(await jITCDbContext.ToListAsync());
+            }
+            
         }
 
         // GET: Vols/Details/5
@@ -296,25 +307,62 @@ namespace JITC.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(vol);
-                   
 
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                if (vol.HeureDepartReelle != null || vol.HeureArriveReelle != null)
                 {
-                    if (!VolExists(vol.Id))
+
+                    if(vol.HeureArriveReelle != null && vol.HeureArriveReelle > vol.HeureArrivePrevue && vol.Raison == null)
                     {
-                        return NotFound();
+                        
+                        ModelState.AddModelError("", "Un retard a été constaté Vous devez renseigner la raison ");
+                        ViewData["AeroportArriveId"] = new SelectList(_context.Aeroport, "Id", "Nom", vol.AeroportArriveId);
+                        ViewData["AeroportDepartId"] = new SelectList(_context.Aeroport, "Id", "Nom", vol.AeroportDepartId);
+                        ViewData["AppareilId"] = new SelectList(_context.Appareil, "Id", "Nom", vol.AppareilId);
+                        ViewData["PiloteId"] = new SelectList(_context.Users
+                            .Join(_context.UserRoles, u => u.Id,
+                            ur => ur.UserId, (u, ur) => new {
+                                Id = u.Id,
+                                Name = u.Name,
+                                Firstname = u.Firstname,
+                                RoleId = ur.RoleId
+                            })
+                            .Join(_context.Roles, x => x.RoleId, r => r.Id, (x, r) => new {
+                                Id = x.Id,
+                                Name = x.Name,
+                                Firstname = x.Firstname,
+                                RoleName = r.Name
+                            })
+                                                            .Where(x => x.RoleName == "Pilote"), "Id", "Firstname", vol.PiloteId);
+                        return View(vol);
                     }
-                    else
+                    try
                     {
-                        throw;
+                        if (vol.HeureArriveReelle > vol.HeureArrivePrevue) { vol.Retard = true; }
+                        _context.Update(vol);
+
+
+                        await _context.SaveChangesAsync();
                     }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!VolExists(vol.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(DashboardPilote));
                 }
-                return RedirectToAction(nameof(Index));
+                else
+                {
+                    ModelState.AddModelError("", "Vous devez renseigner au moins la date de depart reelle ou la date d'arrivé reelle");
+                }
+
+                
+               
             }
             ViewData["AeroportArriveId"] = new SelectList(_context.Aeroport, "Id", "Nom", vol.AeroportArriveId);
             ViewData["AeroportDepartId"] = new SelectList(_context.Aeroport, "Id", "Nom", vol.AeroportDepartId);
@@ -433,5 +481,15 @@ namespace JITC.Controllers
         {
             return deg * (Math.PI / 180);
         }
+
+        // GET: VolsPilote
+        [Authorize(Roles = "Pilote")]
+        public async Task<IActionResult> DashboardPilote()
+        {
+            var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote).Where(v => v.Pilote.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return View(await jITCDbContext.ToListAsync());
+        }
+
+        
     }
 }

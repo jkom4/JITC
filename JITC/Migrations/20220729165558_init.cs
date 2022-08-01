@@ -89,7 +89,8 @@ namespace JITC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VolModifs = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,7 +218,7 @@ namespace JITC.Migrations
                     HeureArriveReelle = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PiloteId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Distance = table.Column<double>(type: "float", nullable: true),
-                    AppareilId = table.Column<int>(type: "int", nullable: true),
+                    AppareilId = table.Column<int>(type: "int", nullable: false),
                     Recurrence = table.Column<int>(type: "int", nullable: false),
                     Retard = table.Column<bool>(type: "bit", nullable: false),
                     Raison = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -240,7 +241,8 @@ namespace JITC.Migrations
                         name: "FK_Vol_Appareil_AppareilId",
                         column: x => x.AppareilId,
                         principalTable: "Appareil",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Vol_AspNetUsers_PiloteId",
                         column: x => x.PiloteId,
@@ -279,8 +281,8 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "f29ecc48-a325-4359-9a29-9443097005fd", "Responsable", "RESPONSABLE" },
-                    { "2", "3d687ea5-4c60-4a7e-af3d-d00de850c48a", "Pilote", "PILOTE" }
+                    { "1", "1d424a84-a186-4a88-a6dc-7a839967ea40", "Responsable", "RESPONSABLE" },
+                    { "2", "16326b16-13fc-46f2-ae9c-3f82c5aba5f9", "Pilote", "PILOTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -288,10 +290,10 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Birthdate", "ConcurrencyStamp", "Email", "EmailConfirmed", "Firstname", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "f647761a-4f35-4862-a5c0-9f20d11e62c8", "M.Ney@jitc.com", false, "Mo", false, null, "Ney", "M.NEY@JITC.COM", "MONEY", "AQAAAAEAACcQAAAAEFK8Dk4vb2meVqcHkC9QxCl5juaFt1NKo/crVKOB7M8qWnqnNIqnD82YpAyOavrnpQ==", null, false, "19fe976d-7c57-44aa-aa79-3c2bd146e770", false, "MoNey" },
-                    { "2", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "a6e8637b-c046-4c80-b1ad-6ee64924ee27", "D.Balav@jitc.com", false, "Daniele", false, null, "Balav", "D.BALAV@JITC.COM", "DANIELEBALAV", "AQAAAAEAACcQAAAAEKRyc6adGfANAmHZ8xNAp4fV/YRAiXuVsxY1JRmOoe6Jflt0YvfPDpa4SvvTRMJHRA==", null, false, "01d78841-f34c-4958-8a03-3dc8d1e63359", false, "DanieleBalav" },
-                    { "3", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "4ae4ad02-0493-42c4-942a-5ad944bfc07a", "T.Sabine@jitc.com", false, "Thierry", false, null, "Sabine", "T.SABINE@JITC.COM", "THIERRYSABINE", "AQAAAAEAACcQAAAAEL5kcH2PP9RVbMz+QlkFFGB2j0O/hUFJtt5NVejYaXvDHY9Ulz7fX2cwhzHiuSGVVA==", null, false, "3fdac64d-0c5e-4193-a32e-537fb7d8345e", false, "ThierrySabine" },
-                    { "4", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "b57446ab-a1f7-4543-89b2-c91609adb24f", "E.Coptere@jitc.com", false, "Eli", false, null, "Copetre", "E.COPTERE@JITC.COM", "ELICOPTERE", "AQAAAAEAACcQAAAAEErxccuLB00g6H044LnKeHGEq/gDYH0pXOwXMZwPrRMMrJLdNCxbn3JpXhrH8JrCzA==", null, false, "d3c56cb5-fe08-46fa-815e-5934bf6cbf37", false, "EliCoptere" }
+                    { "1", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "f3a757e3-cdc9-48e5-9471-9485c7bf1932", "M.Ney@jitc.com", false, "Mo", false, null, "Ney", "M.NEY@JITC.COM", "MONEY", "AQAAAAEAACcQAAAAEADdA9bguwCpCOvtakSjzpQOeAGe9BeEKUknG6nXYAnPSj51dqgSRKJSYGUI8Iur3g==", null, false, "34977647-bc69-47a1-9e38-575deaf88b04", false, "MoNey" },
+                    { "2", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "2c89f7ca-1546-4b78-83fc-3d2db076f680", "D.Balav@jitc.com", false, "Daniele", false, null, "Balav", "D.BALAV@JITC.COM", "DANIELEBALAV", "AQAAAAEAACcQAAAAEItyTsmpg2P8Ub/aEKk8hD0WrrBOcRifxgDvkruZ4VGrz9/qF4ydcRUevm921aRuSg==", null, false, "4cf42ea1-9686-4646-8073-c3e98050184a", false, "DanieleBalav" },
+                    { "3", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bc41a135-e879-4040-8208-c2de416f443e", "T.Sabine@jitc.com", false, "Thierry", false, null, "Sabine", "T.SABINE@JITC.COM", "THIERRYSABINE", "AQAAAAEAACcQAAAAEOtbQEVzo05DrbVSzUoEzZX2nJxCtkLDB8RxRc2dvZ/qLU2wAPoAgdcrmR6LrrWyeg==", null, false, "662ff89a-8b95-4140-80da-a82448cf11c2", false, "ThierrySabine" },
+                    { "4", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1be088be-2601-4855-b7de-498fbfe6e987", "E.Coptere@jitc.com", false, "Eli", false, null, "Copetre", "E.COPTERE@JITC.COM", "ELICOPTERE", "AQAAAAEAACcQAAAAEF9wB5qeHCBTDUAxeA+m2PpJNUQkKa+NaJc06ZvPH4Kgbxtcg+JRJ/Dd5f8iCmRahQ==", null, false, "8331ddfa-414c-4722-80eb-3cafd16cfcd8", false, "EliCoptere" }
                 });
 
             migrationBuilder.InsertData(

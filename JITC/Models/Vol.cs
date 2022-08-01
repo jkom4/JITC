@@ -6,6 +6,7 @@ namespace JITC.Models
 {
     public class Vol
     {
+        [Key]
         public int Id { get; set; }
 
         [ForeignKey("AeroportDepartId")]
@@ -49,7 +50,7 @@ namespace JITC.Models
         public double? Distance { get; set; }
         [ForeignKey("AppareilId")]
         [DisplayName("Appareil")]
-        public int? AppareilId { get; set; }
+        public int AppareilId { get; set; }
         public virtual Appareil? Appareil { get; set; }
         public int Recurrence { get; set; }
         [DefaultValue(false)]
@@ -57,5 +58,8 @@ namespace JITC.Models
         public string? Raison { get; set; }
         public int? ModifVolId { get; set; }
         public virtual ModifVol? ModifVol { get; set; }
+
+        public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+
     }
 }
