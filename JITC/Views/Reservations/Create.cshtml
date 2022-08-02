@@ -1,4 +1,4 @@
-﻿@model JITC.Models.Reservation
+﻿@model JITC.Models.ViewModels.VolViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,20 +13,20 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" hidden>
-                <label asp-for="volId" class="control-label"></label>
-                <select asp-for="volId" class ="form-control" asp-items="ViewBag.volId"></select>
+                <label asp-for="Reservation.volId" class="control-label"></label>
+                <select asp-for="Reservation.volId" class ="form-control" asp-items="ViewBag.volId"></select>
             </div>
             <div class="form-group">
-                <label class="control-label"> @Model.vol.AeroportDepart.Nom </label>
-                <label class="control-label"> @Model.vol.AeroportArrive.Nom </label>
-                <label class="control-label"> @Model.vol.HeureDepartPrevue </label>
+                <label class="control-label"> @Model.Reservation.vol.AeroportDepart.Nom </label>
+                <label class="control-label"> @Model.Reservation.vol.AeroportArrive.Nom </label>
+                <label class="control-label"> @Model.Reservation.vol.HeureDepartPrevue </label>
                 
             </div>
             <div class="form-group">
-                <label asp-for="place" class="control-label"></label>
-                <input asp-for="place" class="form-control" />
-                <span asp-validation-for="place" class="text-danger"></span>
-                <label class="control-label"> "Nombre de place disponible : " @Model.vol.NombrePlace </label>
+                <label asp-for="Reservation.place" class="control-label"></label>
+                <input asp-for="Reservation.place" class="form-control" />
+                <span asp-validation-for="Reservation.place" class="text-danger"></span>
+                <label class="control-label"> "Nombre de place disponible : " @Model.NombrePlaceDispo </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

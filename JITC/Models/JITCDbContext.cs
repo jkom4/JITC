@@ -20,6 +20,7 @@ namespace JITC.Models
         public string? Name { get; set; }
         public DateTime Birthdate { get; set; }
         public virtual ICollection<Vol> Vols { get; set; } = new List<Vol>();
+        public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
     public class JITCDbContext : IdentityDbContext<ApplicationUser>
     {

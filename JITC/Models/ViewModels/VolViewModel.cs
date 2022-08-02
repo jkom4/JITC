@@ -13,8 +13,11 @@
         public Aeroport Depart { get; set; }
         public Aeroport Arrive { get; set; }
         public DateTime DepartPrevue { get; set; } 
-        public DateTime ArrivePrevue { get; set; } 
+        public DateTime ArrivePrevue { get; set; }
+        public DateTime? DepartReelle { get; set; }
+        public DateTime? ArriveReelle { get; set; }
         public int NombrePlace { get; set; } 
+        public int NombrePlaceDispo { get; set; } 
         public ApplicationUser Pilote { get; set; } 
         public Appareil Appareil { get; set; } 
         public int Recurrence { get; set; } 

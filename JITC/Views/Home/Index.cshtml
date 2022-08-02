@@ -8,29 +8,37 @@
     </div>
     
 
-
+    <a  asp-controller="Vols" asp-action="Index"> Voir tous les vols </a>
     <div class="container mt-2">
   <div class="row">
-    <div class="col "  style="
-    background-image: url('img/BX.jpg'); max-width: 100%; height: auto;">
-        <h2>Bruxelles</h2>
-        <p>Visitez Bruxelles</p>
-    </div>
-    <div class="col"
-        style="background-image: url('img/liege.jpg'); max-width: 100%; height: auto;">
-        <h2>Liège</h2>
-        <p>Visitez Liège</p>
-    </div>
-    <div class="col"
-        style="background-image: url('img/oostende.jpg');max-width: 100%; height: auto;">
-        <h2>Oostende</h2>
-        <p>Visitez Oostende</p>
-    </div>
-    <div class="col"
-        style="background-image: url('img/charleroi.png');  max-width: 100%; height: auto;">
-        <h2>Charleroi</h2>
-        <p>Visitez Charleroi</p>
-    </div>
+      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Bruxelles">   
+        <div class="col "  style="
+        background-image: url('img/BX.jpg'); max-width: 100%; height: auto;">
+            <h2>Bruxelles</h2>
+            <p>Visitez Bruxelles</p>
+        </div>
+      </a>
+      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Liège">
+        <div class="col"
+            style="background-image: url('img/liege.jpg'); max-width: 100%; height: auto;">
+            <h2>Liège</h2>
+            <p>Visitez Liège</p>
+        </div>
+      </a> 
+      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Oostende">
+        <div class="col"
+            style="background-image: url('img/oostende.jpg');max-width: 100%; height: auto;">
+            <h2>Oostende</h2>
+            <p>Visitez Oostende</p>
+        </div>
+      </a>
+      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Charleroi">
+        <div class="col"
+            style="background-image: url('img/charleroi.png');  max-width: 100%; height: auto;">
+            <h2>Charleroi</h2>
+            <p>Visitez Charleroi</p>
+        </div>
+      </a>    
   </div>
 
   <div>

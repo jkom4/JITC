@@ -11,6 +11,8 @@ namespace JITC.Models
         public int? Id { get; set; }
         public int? volId { get; set; }
         public virtual Vol? vol { get; set; }
+        public string? UserId { get; set; }
+        public virtual ApplicationUser? User { get; set; }
 
         [DisplayName("Nombre de personne")]
         public  int place { get; set; }

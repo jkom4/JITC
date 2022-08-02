@@ -7,10 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JITC.Models;
 using Microsoft.AspNetCore.Authorization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using JITC.Models.ViewModels;
 using System.Security.Claims;
+using Newtonsoft.Json;
 
 namespace JITC.Controllers
 {
@@ -25,7 +24,7 @@ namespace JITC.Controllers
         }
 
         // GET: Vols
-        public async Task<IActionResult> Index(int? DepartId, int? ArriveId, DateTime? DepartDate)
+        public async Task<IActionResult> Index(int? DepartId, int? ArriveId, DateTime? DepartDate, string? airport)
         {
             if (DepartId != null && ArriveId != null && DepartDate != null)
             {
@@ -33,8 +32,15 @@ namespace JITC.Controllers
                                     .Where(v => v.AeroportDepartId == DepartId && v.AeroportArriveId == ArriveId && v.HeureArrivePrevue.Date == DepartDate);
                 return View(await jITCDbContext.ToListAsync());
             }
-            else { 
-                var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote);
+            else if (airport != null) 
+            {
+                var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote)
+                                    .Where(v => v.AeroportArrive.Nom == airport).Where(v => v.HeureDepartPrevue >= DateTime.Now);
+                return View(await jITCDbContext.ToListAsync());
+            }
+            else
+            {
+                var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote).Where(v => v.HeureDepartPrevue >= DateTime.Now);
                 return View(await jITCDbContext.ToListAsync());
             }
             
@@ -155,7 +161,11 @@ namespace JITC.Controllers
 
         private string CreateModifObject(VolViewModel vol)
         {
-           return JsonSerializer.Serialize(vol);
+           return JsonConvert.SerializeObject(vol,
+            new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
         }
 
         // GET: Vols/Edit/5

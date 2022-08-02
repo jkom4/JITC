@@ -19,10 +19,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => {
     options.Password.RequireDigit = false; options.Password.RequiredLength = 4; options.Password.RequireUppercase = false;
 })
     .AddDefaultUI().AddEntityFrameworkStores<JITCDbContext>()
-    .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider); ;
-
-
-
+    .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

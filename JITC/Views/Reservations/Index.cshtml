@@ -6,9 +6,7 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -45,7 +43,13 @@
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details du vol</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Annuler</a>
+                    @{
+                        if (item.vol.HeureDepartReelle == null)
+                        {
+                           <a asp-action="Delete" asp-route-id="@item.Id">Annuler</a>
+                        }
+                    }
+                
             </td>
         </tr>
 }

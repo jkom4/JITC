@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JITC.Models;
 using JITC.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace JITC.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly JITCDbContext _context;
@@ -22,7 +25,7 @@ namespace JITC.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            var reservation = await _context.Reservation.Include(r => r.vol).ToListAsync();
+            var reservation = await _context.Reservation.Include(r => r.vol).Where(r => r.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
             var vol = await _context.Vol
                .Include(v => v.AeroportArrive)
                .Include(v => v.AeroportDepart)
@@ -43,7 +46,6 @@ namespace JITC.Controllers
             {
                 return NotFound();
             }
-
             var reservation = await _context.Reservation
                 .Include(r => r.vol)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -76,6 +78,7 @@ namespace JITC.Controllers
             {
                 return NotFound();
             }
+
             var vol = await _context.Vol
                 .Include(v => v.AeroportArrive)
                 .Include(v => v.AeroportDepart)
@@ -83,11 +86,20 @@ namespace JITC.Controllers
                 .Include(v => v.Pilote)
                 .FirstOrDefaultAsync(m => m.Id == id);
             ViewData["volId"] = new SelectList(_context.Vol, "Id", "Id");
+            var nbreOccupe = 0;
+            foreach (var reser in vol.Reservations)
+            {
+                nbreOccupe += reser.place;
+            }
 
+            var nbreDispo = vol.NombrePlace - nbreOccupe;
             var reservation = new Reservation();
             reservation.volId = id;
             reservation.vol = vol;
-            return View(reservation);
+            var viewModel = new VolViewModel();
+            viewModel.NombrePlaceDispo = nbreDispo;
+            viewModel.Reservation = reservation;
+            return View(viewModel);
         }
 
         // POST: Reservations/Create
@@ -196,12 +208,30 @@ namespace JITC.Controllers
             var reservation = await _context.Reservation
                 .Include(r => r.vol)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (reservation == null)
+            var vol = await _context.Vol
+               .Include(v => v.AeroportArrive)
+               .Include(v => v.AeroportDepart)
+               .Include(v => v.Appareil)
+               .Include(v => v.Pilote)
+               .FirstOrDefaultAsync(m => m.Id == id);
+            if (reservation == null || vol == null)
             {
                 return NotFound();
             }
+            var viewModel = new VolViewModel();
+            viewModel.IdVol = vol.Id;
+            viewModel.Appareil = vol.Appareil;
+            viewModel.NombrePlace = vol.NombrePlace;
+            viewModel.Depart = vol.AeroportDepart;
+            viewModel.Arrive = vol.AeroportArrive;
+            viewModel.DepartPrevue = vol.HeureDepartPrevue;
+            viewModel.ArrivePrevue = vol.HeureArrivePrevue;
+            viewModel.DepartReelle = vol.HeureDepartReelle;
+            viewModel.ArriveReelle = vol.HeureArriveReelle;
+            viewModel.Reservation = reservation;
+           
 
-            return View(reservation);
+            return View(viewModel);
         }
 
         // POST: Reservations/Delete/5
@@ -213,14 +243,18 @@ namespace JITC.Controllers
             {
                 return Problem("Entity set 'JITCDbContext.Reservation'  is null.");
             }
-            var reservation = await _context.Reservation.FindAsync(id);
-            if (reservation != null)
+            var reservation = await _context.Reservation.Include(r => r.vol).FirstAsync(r => r.Id == id);
+            if (reservation != null && (DateTime.Now.AddDays(1) <= reservation.vol.HeureDepartPrevue))
             {
                 _context.Reservation.Remove(reservation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return Problem("Vous ne pouvez pas annuler a moins de 24H");
             }
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ReservationExists(int? id)
