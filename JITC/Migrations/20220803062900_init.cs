@@ -255,6 +255,31 @@ namespace JITC.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Reservation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    volId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    place = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reservation_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Reservation_Vol_volId",
+                        column: x => x.volId,
+                        principalTable: "Vol",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Aeroport",
                 columns: new[] { "Id", "Latitude", "Longitude", "Nom" },
@@ -271,9 +296,9 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "Capacite_Cab", "Description", "Moteur", "Nom", "Statut", "Vitesse" },
                 values: new object[,]
                 {
-                    { 1, 5, "", "deux turbines du modèle de Rolls Royce 250-C20F", "Eurocopter AS 355 F1/F2 Ecureuil III", false, 220f },
-                    { 2, 4, "", "une turbine du type Rolls Royce 250-C20B", "Bell 206 JetRanger", false, 190f },
-                    { 3, 3, "", "un piston du type Lycoming modèle IO-540", "Robinson R44 Raven II", false, 190f }
+                    { 1, 5, "", "Deux turbines du modèle de Rolls Royce 250-C20F", "Eurocopter AS 355 F1/F2 Ecureuil III", false, 220f },
+                    { 2, 4, "", "Une turbine du type Rolls Royce 250-C20B", "Bell 206 JetRanger", false, 190f },
+                    { 3, 3, "", "Un piston du type Lycoming modèle IO-540", "Robinson R44 Raven II", false, 190f }
                 });
 
             migrationBuilder.InsertData(
@@ -281,8 +306,8 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "1d424a84-a186-4a88-a6dc-7a839967ea40", "Responsable", "RESPONSABLE" },
-                    { "2", "16326b16-13fc-46f2-ae9c-3f82c5aba5f9", "Pilote", "PILOTE" }
+                    { "1", "28a25804-325c-4e30-8ad5-b59cb03dcfc9", "Responsable", "RESPONSABLE" },
+                    { "2", "383fc3d4-3c30-4708-bcbf-0169df6ec82a", "Pilote", "PILOTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -290,10 +315,10 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Birthdate", "ConcurrencyStamp", "Email", "EmailConfirmed", "Firstname", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "f3a757e3-cdc9-48e5-9471-9485c7bf1932", "M.Ney@jitc.com", false, "Mo", false, null, "Ney", "M.NEY@JITC.COM", "MONEY", "AQAAAAEAACcQAAAAEADdA9bguwCpCOvtakSjzpQOeAGe9BeEKUknG6nXYAnPSj51dqgSRKJSYGUI8Iur3g==", null, false, "34977647-bc69-47a1-9e38-575deaf88b04", false, "MoNey" },
-                    { "2", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "2c89f7ca-1546-4b78-83fc-3d2db076f680", "D.Balav@jitc.com", false, "Daniele", false, null, "Balav", "D.BALAV@JITC.COM", "DANIELEBALAV", "AQAAAAEAACcQAAAAEItyTsmpg2P8Ub/aEKk8hD0WrrBOcRifxgDvkruZ4VGrz9/qF4ydcRUevm921aRuSg==", null, false, "4cf42ea1-9686-4646-8073-c3e98050184a", false, "DanieleBalav" },
-                    { "3", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bc41a135-e879-4040-8208-c2de416f443e", "T.Sabine@jitc.com", false, "Thierry", false, null, "Sabine", "T.SABINE@JITC.COM", "THIERRYSABINE", "AQAAAAEAACcQAAAAEOtbQEVzo05DrbVSzUoEzZX2nJxCtkLDB8RxRc2dvZ/qLU2wAPoAgdcrmR6LrrWyeg==", null, false, "662ff89a-8b95-4140-80da-a82448cf11c2", false, "ThierrySabine" },
-                    { "4", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1be088be-2601-4855-b7de-498fbfe6e987", "E.Coptere@jitc.com", false, "Eli", false, null, "Copetre", "E.COPTERE@JITC.COM", "ELICOPTERE", "AQAAAAEAACcQAAAAEF9wB5qeHCBTDUAxeA+m2PpJNUQkKa+NaJc06ZvPH4Kgbxtcg+JRJ/Dd5f8iCmRahQ==", null, false, "8331ddfa-414c-4722-80eb-3cafd16cfcd8", false, "EliCoptere" }
+                    { "1", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "99193783-2351-4d5d-b62a-0ab78d180302", "M.Ney@jitc.com", false, "Mo", false, null, "Ney", "M.NEY@JITC.COM", "MONEY", "AQAAAAEAACcQAAAAEAonfFh1FBmaxnRvEoDYwq7LT5amFqDhBXeiX1ho63MIa53RnjB0eosSRqsNJPlhGQ==", null, false, "124a5455-86dc-4a35-8412-919d7767d589", false, "MoNey" },
+                    { "2", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "e4837413-88df-4bae-9915-08982f0259b0", "D.Balav@jitc.com", false, "Daniele", false, null, "Balav", "D.BALAV@JITC.COM", "DANIELEBALAV", "AQAAAAEAACcQAAAAEGs0VHcXuQhhYRgRcHK//Ew8ECCpPPg4LEqZVuXl/9HeI9y19UHniHVuWPZfeg8khg==", null, false, "00d889df-f590-427a-be5d-39b166ab8db1", false, "DanieleBalav" },
+                    { "3", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "091d4bea-728f-42f9-b2b6-ceabe21b5694", "T.Sabine@jitc.com", false, "Thierry", false, null, "Sabine", "T.SABINE@JITC.COM", "THIERRYSABINE", "AQAAAAEAACcQAAAAEAc4lEWc6X9jGkvq+Nvx3gZQOGZ1hq7dlKef4BOF4gfEO7paVx58F19rmUOT7kIBDA==", null, false, "176cf282-2eea-4f28-9c7b-21ec40e67cb0", false, "ThierrySabine" },
+                    { "4", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "a3c61fb5-fb5d-4cc2-8a25-d8e64e798ebf", "E.Coptere@jitc.com", false, "Eli", false, null, "Copetre", "E.COPTERE@JITC.COM", "ELICOPTERE", "AQAAAAEAACcQAAAAEFvBp+uy6syDes29WB9Y8W7HXfTsEpSa573+iWllTj+DYlwy0lmkpoiLUGnzvAlFBw==", null, false, "15503496-2002-443d-9459-f9f8276b31a8", false, "EliCoptere" }
                 });
 
             migrationBuilder.InsertData(
@@ -354,6 +379,16 @@ namespace JITC.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reservation_UserId",
+                table: "Reservation",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservation_volId",
+                table: "Reservation",
+                column: "volId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vol_AeroportArriveId",
                 table: "Vol",
                 column: "AeroportArriveId");
@@ -397,10 +432,13 @@ namespace JITC.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Vol");
+                name: "Reservation");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Vol");
 
             migrationBuilder.DropTable(
                 name: "Aeroport");

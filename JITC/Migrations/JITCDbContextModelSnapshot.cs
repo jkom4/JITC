@@ -228,7 +228,7 @@ namespace JITC.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "8f226445-efa0-476f-96f8-a32e7fc5635f",
+                            ConcurrencyStamp = "99193783-2351-4d5d-b62a-0ab78d180302",
                             Email = "M.Ney@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Mo",
@@ -236,9 +236,9 @@ namespace JITC.Migrations
                             Name = "Ney",
                             NormalizedEmail = "M.NEY@JITC.COM",
                             NormalizedUserName = "MONEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBYvfyfJHjhCyeaqh5xEFaq2Nz9iJtiCOH+Iw1EO8Qalr9BwxeB5bkjsD+FwaEsMBg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAonfFh1FBmaxnRvEoDYwq7LT5amFqDhBXeiX1ho63MIa53RnjB0eosSRqsNJPlhGQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9d6ca759-60fd-4a49-84e6-f1b6030413f3",
+                            SecurityStamp = "124a5455-86dc-4a35-8412-919d7767d589",
                             TwoFactorEnabled = false,
                             UserName = "MoNey"
                         },
@@ -247,7 +247,7 @@ namespace JITC.Migrations
                             Id = "2",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "fa998565-92e2-449c-b047-d6844f721951",
+                            ConcurrencyStamp = "e4837413-88df-4bae-9915-08982f0259b0",
                             Email = "D.Balav@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Daniele",
@@ -255,9 +255,9 @@ namespace JITC.Migrations
                             Name = "Balav",
                             NormalizedEmail = "D.BALAV@JITC.COM",
                             NormalizedUserName = "DANIELEBALAV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBBUd9XQc5Z/9M2a/fuGK4MHNzetD+bFURgg8Nq4KTFr6gh9nIdaB/WZ+pLztwBvqg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGs0VHcXuQhhYRgRcHK//Ew8ECCpPPg4LEqZVuXl/9HeI9y19UHniHVuWPZfeg8khg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7ddeac4-5a39-4bbf-977a-1a7debb14ec1",
+                            SecurityStamp = "00d889df-f590-427a-be5d-39b166ab8db1",
                             TwoFactorEnabled = false,
                             UserName = "DanieleBalav"
                         },
@@ -266,7 +266,7 @@ namespace JITC.Migrations
                             Id = "3",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "328cbb2b-1ecc-42a4-ae4f-a06f39535cb8",
+                            ConcurrencyStamp = "091d4bea-728f-42f9-b2b6-ceabe21b5694",
                             Email = "T.Sabine@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Thierry",
@@ -274,9 +274,9 @@ namespace JITC.Migrations
                             Name = "Sabine",
                             NormalizedEmail = "T.SABINE@JITC.COM",
                             NormalizedUserName = "THIERRYSABINE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI032NNoIPgIpFa5lhJW3zIyxqZtZvhSMQGDiFzYp90/3y0OGybS37rx+nqfxD99SA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAc4lEWc6X9jGkvq+Nvx3gZQOGZ1hq7dlKef4BOF4gfEO7paVx58F19rmUOT7kIBDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "52159a91-dda9-4258-a7da-e431ab259bbe",
+                            SecurityStamp = "176cf282-2eea-4f28-9c7b-21ec40e67cb0",
                             TwoFactorEnabled = false,
                             UserName = "ThierrySabine"
                         },
@@ -285,7 +285,7 @@ namespace JITC.Migrations
                             Id = "4",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "2cd5b9d8-d943-4a65-9668-5ff1331369b1",
+                            ConcurrencyStamp = "a3c61fb5-fb5d-4cc2-8a25-d8e64e798ebf",
                             Email = "E.Coptere@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Eli",
@@ -293,9 +293,9 @@ namespace JITC.Migrations
                             Name = "Copetre",
                             NormalizedEmail = "E.COPTERE@JITC.COM",
                             NormalizedUserName = "ELICOPTERE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJR3q0aN50l9WrAycqcYjIRsWA2KdwhTyNiV/g/fBfZKAO2tbyAKO9nA0TURjCetkQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFvBp+uy6syDes29WB9Y8W7HXfTsEpSa573+iWllTj+DYlwy0lmkpoiLUGnzvAlFBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3053c97a-dede-4920-a1fd-eca33e672659",
+                            SecurityStamp = "15503496-2002-443d-9459-f9f8276b31a8",
                             TwoFactorEnabled = false,
                             UserName = "EliCoptere"
                         });
@@ -439,14 +439,14 @@ namespace JITC.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "6e3db67b-f035-4096-980f-cdb84e32c5c5",
+                            ConcurrencyStamp = "28a25804-325c-4e30-8ad5-b59cb03dcfc9",
                             Name = "Responsable",
                             NormalizedName = "RESPONSABLE"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "5b2d6528-6aa5-4039-8ff4-235cc5e6c38a",
+                            ConcurrencyStamp = "383fc3d4-3c30-4708-bcbf-0169df6ec82a",
                             Name = "Pilote",
                             NormalizedName = "PILOTE"
                         });

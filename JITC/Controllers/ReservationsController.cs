@@ -9,6 +9,7 @@ using JITC.Models;
 using JITC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace JITC.Controllers
 {
@@ -17,15 +18,18 @@ namespace JITC.Controllers
     {
         private readonly JITCDbContext _context;
 
-        public ReservationsController(JITCDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public ReservationsController(JITCDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            var reservation = await _context.Reservation.Include(r => r.vol).Where(r => r.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
+            var reservation = await _context.Reservation.Include(r => r.vol).Where(r => r.UserId ==_userManager.GetUserId(User)).ToListAsync();
             var vol = await _context.Vol
                .Include(v => v.AeroportArrive)
                .Include(v => v.AeroportDepart)
@@ -84,6 +88,7 @@ namespace JITC.Controllers
                 .Include(v => v.AeroportDepart)
                 .Include(v => v.Appareil)
                 .Include(v => v.Pilote)
+                .Include(v => v.Reservations)
                 .FirstOrDefaultAsync(m => m.Id == id);
             ViewData["volId"] = new SelectList(_context.Vol, "Id", "Id");
             var nbreOccupe = 0;
@@ -116,16 +121,17 @@ namespace JITC.Controllers
                 .Include(v => v.Pilote)
                 .Include(v => v.Reservations)
                 .FirstOrDefaultAsync(v => v.Id == reservation.volId);
+            var nbreOccupe = 0;
+            foreach (var reser in vol.Reservations)
+            {
+                nbreOccupe += reser.place;
+            }
 
+            var nbreDispo = vol.NombrePlace - nbreOccupe;
             if (ModelState.IsValid)
             {
-                
-                var nbreOccupe = 0;
-                foreach (var reser in vol.Reservations) {
-                    nbreOccupe += reser.place;
-                }
-
-                var nbreDispo = vol.NombrePlace -  nbreOccupe;
+                reservation.UserId = _userManager.GetUserId(User);
+               
 
                 if (nbreDispo >= reservation.place)
                 {
@@ -139,9 +145,13 @@ namespace JITC.Controllers
                 }
                
             }
+            
+            reservation.volId = vol.Id;
             reservation.vol = vol;
-            ViewData["volId"] = new SelectList(_context.Vol, "Id", "Id", reservation.volId);
-            return View(reservation);
+            var viewModel = new VolViewModel();
+            viewModel.NombrePlaceDispo = nbreDispo;
+            viewModel.Reservation = reservation;
+            return View(viewModel);
         }
 
         // GET: Reservations/Edit/5
@@ -213,7 +223,8 @@ namespace JITC.Controllers
                .Include(v => v.AeroportDepart)
                .Include(v => v.Appareil)
                .Include(v => v.Pilote)
-               .FirstOrDefaultAsync(m => m.Id == id);
+               .Include(v => v.Reservations)
+               .FirstOrDefaultAsync(m => m.Id == reservation.volId);
             if (reservation == null || vol == null)
             {
                 return NotFound();
