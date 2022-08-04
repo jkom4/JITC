@@ -150,9 +150,10 @@ namespace JITC.Models
             modelBuilder.Entity<Vol>().HasOne(v => v.ModifVol).WithMany(m => m.Vols);
             modelBuilder.Entity<Vol>().HasOne(v => v.Appareil).WithMany(a => a.Vols).HasForeignKey(v => v.AppareilId);
             modelBuilder.Entity<ModifVol>().Property(m => m.VolModifs)
-    .HasConversion(
-        v => JsonConvert.SerializeObject(v),
-        v => JsonConvert.DeserializeObject<List<string>>(v));
+                    .HasConversion(
+                    v => JsonConvert.SerializeObject(v),
+                    v => JsonConvert.DeserializeObject<List<string>>(v));
+            modelBuilder.Entity<Vol>().Property(f => f.Id).ValueGeneratedOnAdd();
 
         }
 

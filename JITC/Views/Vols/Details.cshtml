@@ -1,4 +1,5 @@
-﻿@model JITC.Models.Vol
+﻿@using Newtonsoft.Json
+@model JITC.Models.Vol
 
 @{
     ViewData["Title"] = "Details";
@@ -75,26 +76,42 @@
         </dt>
         <dd class = "col-sm-10">
             @*Html.DisplayFor(model => model.Recurrence)*@
-            @{
-                switch (Model.Recurrence)
-                {
-                    case 0 : <p>Tous les jours </p>;
-                            break;
-                    case 1 : <p>Tous les lundis </p>;
-                            break;
-                    case 2 : <p>Tous les mardis </p>;
-                            break;
-                    case 3 : <p>Tous les mercredis </p>;
-                            break;
-                    case 4 : <p>Tous les jeudis </p>;
-                            break;
-                    case 5 : <p>Tous les vendredis </p>;
-                            break;
-                    case 6 : <p>Tous les samedis </p>;
-                            break;
-                    case 7 : <p>Tous les dimanches </p>;
-                            break;;
-                }
+           @{
+                            if (Model.Recurrence.Length == 8)
+                            {
+
+                                <p>Tous les jours </p>
+
+
+                            }
+                            else
+                            {
+                                foreach (var rec in JsonConvert.DeserializeObject<String[]>( Model.Recurrence))
+                                {
+                             
+                                     switch (rec )
+                                     {
+                                    
+                                        case "Monday" :  <p>Tous les lundis </p>;
+                                                break;
+                                        case "Tuesday" : <p>Tous les mardis </p>;
+                                                break;
+                                        case "Wednesday" : <p>Tous les mercredis </p>;
+                                                break;
+                                        case "Thursday" : <p>Tous les jeudis </p>;
+                                                break;
+                                        case "Friday" : <p>Tous les vendredis </p>;
+                                                break;
+                                        case "Saturday" : <p>Tous les samedis </p>;
+                                                break;
+                                        case "Sunday" : <p>Tous les dimanches </p>;
+                                                break;;
+                                     }
+                                }
+                            }
+                            
+
+                           
                          
                     }
             
@@ -115,5 +132,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a>| <a asp-action="DetailsModif" asp-route-idVol="@Model?.Id">Liste des Modifications</a>
 </div>

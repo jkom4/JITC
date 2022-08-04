@@ -73,26 +73,42 @@
                 @Html.DisplayFor(modelItem => item.Appareil.Nom)
             </td>
             <td>
-                  @{
-                switch (item.Recurrence )
-                {
-                    case 0 : <p>Tous les jours </p>;
-                            break;
-                    case 1 : <p>Tous les lundis </p>;
-                            break;
-                    case 2 : <p>Tous les mardis </p>;
-                            break;
-                    case 3 : <p>Tous les mercredis </p>;
-                            break;
-                    case 4 : <p>Tous les jeudis </p>;
-                            break;
-                    case 5 : <p>Tous les vendredis </p>;
-                            break;
-                    case 6 : <p>Tous les samedis </p>;
-                            break;
-                    case 7 : <p>Tous les dimanches </p>;
-                            break;;
-                }
+                        @{
+                            if (item.Recurrence.Length == 8)
+                            {
+
+                                <p>Tous les jours </p>
+
+
+                            }
+                            else
+                            {
+                                foreach (var rec in item.Recurrence)
+                                {
+                             
+                                     switch (rec )
+                                     {
+                                    
+                                        case "Monday" :  <p>Tous les lundis </p>;
+                                                break;
+                                        case "Tuesday" : <p>Tous les mardis </p>;
+                                                break;
+                                        case "Wednesday" : <p>Tous les mercredis </p>;
+                                                break;
+                                        case "Thursday" : <p>Tous les jeudis </p>;
+                                                break;
+                                        case "Friday" : <p>Tous les vendredis </p>;
+                                                break;
+                                        case "Saturday" : <p>Tous les samedis </p>;
+                                                break;
+                                        case "Sunday" : <p>Tous les dimanches </p>;
+                                                break;;
+                                     }
+                                }
+                            }
+                            
+
+                           
                          
                     }
             </td>

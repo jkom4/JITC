@@ -20,7 +20,7 @@
         public int NombrePlaceDispo { get; set; } 
         public ApplicationUser Pilote { get; set; } 
         public Appareil Appareil { get; set; } 
-        public int Recurrence { get; set; } 
+        public string[] Recurrence { get; set; } 
         public Reservation? Reservation { get; set; }
 
         public List<Reservation>? Reservations { get; set; }

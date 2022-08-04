@@ -52,7 +52,10 @@ namespace JITC.Models
         [DisplayName("Appareil")]
         public int AppareilId { get; set; }
         public virtual Appareil? Appareil { get; set; }
-        public int Recurrence { get; set; }
+
+        public string Recurrence { get; set; }
+        [NotMapped]
+        public int NombreMois { get; set; }
         [DefaultValue(false)]
         public bool Retard { get; set; }
         public string? Raison { get; set; }

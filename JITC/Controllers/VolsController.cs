@@ -96,30 +96,67 @@ namespace JITC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles ="Responsable")]
-        public async Task<IActionResult> Create([Bind("Id,AeroportDepartId,AeroportArriveId,NombrePlace,HeureDepartPrevue,HeureArrivePrevue,HeureDepartReelle,HeureArriveReelle,PiloteId,Distance,AppareilId,Recurrence,Retard,Raison")] Vol vol)
+        public async Task<IActionResult> Create(string[] Recurrence,[Bind("Id,AeroportDepartId,AeroportArriveId,NombrePlace,HeureDepartPrevue,HeureArrivePrevue,HeureDepartReelle,HeureArriveReelle,PiloteId,Distance,AppareilId,Recurrence,NombreMois,Retard,Raison")] Vol vol)
         {
-            if (vol.AeroportDepartId == vol.AeroportArriveId) {
+            
+                vol.Recurrence = JsonConvert.SerializeObject(Recurrence);
+             if (vol.AeroportDepartId == vol.AeroportArriveId) {
                 ModelState.AddModelError("", "l'aeroport de départ doit être différent de celui d'arrivé");
             }
             else if (vol.HeureDepartPrevue < DateTime.Now || vol.HeureArrivePrevue <= vol.HeureDepartPrevue)
             {
                 ModelState.AddModelError("", "La date d'arrivé doit être superieure a celui de départ et la date courante");
             }
+            
             else if (ModelState.IsValid)
             {
 
                 Aeroport Depart = await _context.Aeroport.Where(a => a.Id == vol.AeroportDepartId).FirstOrDefaultAsync();
                 Aeroport Arrive = await _context.Aeroport.Where(a => a.Id == vol.AeroportArriveId).FirstOrDefaultAsync();
                 vol.Distance = getDistanceFromLatLonInKm(Depart.Latitude, Depart.Longitude, Arrive.Latitude, Arrive.Longitude);
-                ModifVol modifVol = new ModifVol();
-                VolViewModel volViewModel = CreateViewModel(vol,_context);
+                var volsValid = new List<Vol>();
+                var modifValid = new List<ModifVol>();
+                int nber = 0;
+                for (int i = 0; i < vol.NombreMois; i++) 
+                {
+                    foreach (var jour in Recurrence) 
+                    {
+                        var jours = GetDates(DateTime.Now.Year, DateTime.Now.Month + i).Where(j => j.DayOfWeek.ToString() == jour);
+                        foreach (var jr in jours)
+                        {
+                            if (jr > DateTime.Now)
+                            {
+                                var vol1 = new Vol();
+                                vol1.AeroportDepartId = vol.AeroportDepartId;
+                                vol1.AeroportArriveId = vol.AeroportArriveId;
+                                vol1.AppareilId = vol.AppareilId;
+                                vol1.Distance = vol.Distance;
+                                vol1.NombreMois = vol.NombreMois;
+                                vol1.NombrePlace = vol.NombrePlace;
+                                vol1.PiloteId = vol.PiloteId;
+                                vol1.Recurrence = vol.Recurrence;
 
-                modifVol.VolModifs.Add(CreateModifObject(volViewModel));
-                vol.ModifVol = modifVol;
-                _context.Add(modifVol);
-                _context.Add(vol);
+                                DateTime departDate = jr.AddHours(vol.HeureDepartPrevue.Hour).AddMinutes(vol.HeureDepartPrevue.Minute).AddSeconds(vol.HeureDepartPrevue.Second);
+                                DateTime arriveDate = jr.AddHours(vol.HeureArrivePrevue.Hour).AddMinutes(vol.HeureArrivePrevue.Minute).AddSeconds(vol.HeureArrivePrevue.Second);
+                                vol1.HeureDepartPrevue = departDate;
+                                vol1.HeureArrivePrevue = arriveDate;
 
+                                ModifVol modifVol = new ModifVol();
+                                VolViewModel volViewModel = CreateViewModel(vol1, _context);
+                                modifVol.VolModifs.Add(CreateModifObject(volViewModel));
+                                vol1.ModifVol = modifVol;
+                                
+                                modifValid.Add(modifVol);
+                                
+                                volsValid.Add(vol1);
+                            }
+                        }
+                    }
+                }
 
+                _context.Vol.AddRange(volsValid);
+                _context.ModifVol.AddRange(modifValid);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -143,8 +180,14 @@ namespace JITC.Controllers
                                                 .Where(x => x.RoleName == "Pilote"), "Id", "Name", vol.PiloteId);
             return View(vol);
         }
+        public static List<DateTime> GetDates(int year, int month)
+        {
+            return Enumerable.Range(1, DateTime.DaysInMonth(year, month))  // Days: 1, 2 ... 31 etc.
+                             .Select(day => new DateTime(year, month, day)) // Map each day to a date
+                             .ToList();
+        }
 
-        private static  VolViewModel CreateViewModel(Vol vol,JITCDbContext context)
+            private static  VolViewModel CreateViewModel(Vol vol,JITCDbContext context)
         {
             VolViewModel volViewModel = new VolViewModel();
             volViewModel.IdVol = vol.Id;
@@ -155,7 +198,7 @@ namespace JITC.Controllers
             volViewModel.NombrePlace = vol.NombrePlace;
             volViewModel.Pilote = context.Users.Find(vol.PiloteId);
             volViewModel.Appareil = context.Appareil.Find(vol.AppareilId);
-            volViewModel.Recurrence = vol.Recurrence;
+            volViewModel.Recurrence = JsonConvert.DeserializeObject<string[]>(vol.Recurrence);
             return volViewModel;
         }
 
@@ -435,33 +478,27 @@ namespace JITC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: ModifVols
-        public async Task<IActionResult> ListModif()
-        {
-            var jITCDbContext = _context.ModifVol.Include(v => v.Vols);
-            return View(await jITCDbContext.ToListAsync());
-        }
-
+       
         // GET: Vols/DetailsModif/5
-        public async Task<IActionResult> DetailsModif(int? id)
+        public async Task<IActionResult> DetailsModif(int? idVol)
         {
-            if (id == null || _context.ModifVol == null)
+            if (idVol == null || _context.ModifVol == null)
             {
                 return NotFound();
             }
 
             var modifVol = await _context.ModifVol
                 .Include(v => v.Vols)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Vols.FirstOrDefault().Id == idVol);
             var vol = await _context.Vol
                 .Include(v => v.AeroportArrive)
                 .Include(v => v.AeroportDepart)
                 .Include(v => v.Appareil)
                 .Include(v => v.Pilote)
-                .FirstOrDefaultAsync(v => v.ModifVolId == id);
+                .FirstOrDefaultAsync(v => v.Id == idVol);
             if (modifVol == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
             
             return View( modifVol);
@@ -500,6 +537,20 @@ namespace JITC.Controllers
             return View(await jITCDbContext.ToListAsync());
         }
 
-        
+        // GET: Chart
+        [Authorize(Roles = "Responsable")]
+        public async Task<IActionResult> Chart()
+        {
+            return View();
+        }
+        // GET: Chart
+        [Authorize(Roles = "Responsable")]
+        public async Task<IActionResult> ChartRetard()
+        {
+            var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote).Where(v => v.Retard == true).ToListAsync().Result;
+            return View(jITCDbContext);
+            
+        }
+
     }
 }
