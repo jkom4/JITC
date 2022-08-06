@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.place)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.vol.Id">Details du vol</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details du vol</a> |
                     @{
                         if (item.vol.HeureDepartReelle == null)
                         {

@@ -21,46 +21,52 @@
     $('#DepartDate').attr('min', maxDate);
 });
     </script>
-  <div class="row g-3 ">
-  <form asp-controller="Vols" asp-action="Index"  enctype="multipart/form-data">
-    <div class="col form-floating">
+  <div class="container-fluid bg-light" >
+  
+      <form class="row gx-3 gy-2 align-items-center d-flex justify-content-between" asp-controller="Vols" asp-action="Index"  enctype="multipart/form-data">
+        <div  class="col-sm-3 form-floating">
     
-        <select asp-for="DepartId"  asp-name="DepartId" class="form-control" placeholder="Départ">
-                        <option value="1" selected>Select Aeroport</option>
-                        @{
-                        if (ViewBag.Aeroport != null)
-                        {
-                            foreach (var item in ViewBag.Aeroport)
+            <select asp-for="DepartId"  asp-name="DepartId" class="form-select"  placeholder="Départ">
+                            <option value="1" selected>Select Aeroport</option>
+                            @{
+                            if (ViewBag.Aeroport != null)
                             {
-                                        <option value="@item.Id">@item.Nom</option>
+                                foreach (var item in ViewBag.Aeroport)
+                                {
+                                            <option value="@item.Id">@item.Nom</option>
+                                }
                             }
-                        }
-                        }
-                    </select>
-        <label for="DepartId">Départ</label>
-    </div>
-    <div class="col form-floating">
-        <select asp-for="ArriveId" name="ArriveId" class="form-control" placeholder="Destination">
-                        <option value="2"   selected>Select Aeroport</option>
-                        @{
-                        if (ViewBag.Aeroport != null)
-                        {
-                            foreach (var item in ViewBag.Aeroport)
-                            {
-                                        <option value="@item.Id">@item.Nom</option>
                             }
-                        }
-                        }
-                    </select>
-        <label for="ArriveId">Destination</label>
-     </div
-            <div class="form-group">
-                <input asp-for="DepartDate"  id= "DepartDate" type="date" class="form-control"  placeholder="Date" required/>
-                <span asp-validation-for="DepartDate" class="text-danger"></span>
-            </div>
-        <div class="col">
-            <button  type ="submit" class="btn btn-primary">Rechercher</button>
+                        </select>
+            <label for="DepartId">Départ</label>
         </div>
-    </form>
+        <div class="col-sm-3 form-floating">
+            <select asp-for="ArriveId" name="ArriveId" class="form-select" id="inputGroup-sizing-lg" placeholder="Destination">
+                            <option value="2"   selected>Select Aeroport</option>
+                            @{
+                            if (ViewBag.Aeroport != null)
+                            {
+                                foreach (var item in ViewBag.Aeroport)
+                                {
+                                            <option value="@item.Id">@item.Nom</option>
+                                }
+                            }
+                            }
+                        </select>
+            <label for="ArriveId">Destination</label>
+         </div>
+                <div class=" col-sm-3 form-floating">
+                    <input asp-for="DepartDate"  id= "DepartDate" type="date" class="form-control" id="inputGroup-sizing-lg"   placeholder="Date" required/>
+                    <span asp-validation-for="DepartDate" class="text-danger"></span>
+                    <label for="DepartId">Date de Départ</label>
+                </div>
+            <div class="col-auto ">
+                <button  type ="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
+        <br>
+        <a class="link-primary" asp-controller="Vols" asp-action="Index"> Voir tous les vols </a>
+        <br>
   </div>
+  
 }

@@ -100,16 +100,8 @@ namespace JITC.Controllers
         {
             
                 vol.Recurrence = JsonConvert.SerializeObject(Recurrence);
-             if (vol.AeroportDepartId == vol.AeroportArriveId) {
-                ModelState.AddModelError("", "l'aeroport de départ doit être différent de celui d'arrivé");
-            }
-            else if (vol.HeureDepartPrevue < DateTime.Now || vol.HeureArrivePrevue <= vol.HeureDepartPrevue)
-            {
-                ModelState.AddModelError("", "La date d'arrivé doit être superieure a celui de départ et la date courante");
-            }
-            
-            else if (ModelState.IsValid)
-            {
+              if (ModelState.IsValid)
+              {
 
                 Aeroport Depart = await _context.Aeroport.Where(a => a.Id == vol.AeroportDepartId).FirstOrDefaultAsync();
                 Aeroport Arrive = await _context.Aeroport.Where(a => a.Id == vol.AeroportArriveId).FirstOrDefaultAsync();
@@ -258,15 +250,13 @@ namespace JITC.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
-               
-                //var volDb = _context.Vol.Where(v => v.Id == id).Include(v => v.ModifVol).First();
-                //vol.ModifVol = volDb.ModifVol;
+        
+           if (ModelState.IsValid)
+            { 
                 try
                 {
-                    // vol.ModifVol.Vols.Add(vol);
+                 
+                   
                     _context.Update(vol);
                     var modifVol = await _context.ModifVol.FindAsync(vol.ModifVolId);
                     VolViewModel volViewModel = CreateViewModel(vol, _context);
@@ -541,6 +531,40 @@ namespace JITC.Controllers
         [Authorize(Roles = "Responsable")]
         public async Task<IActionResult> Chart()
         {
+            var appareils = _context.Appareil.ToList();
+            var tabAppareil = new string[appareils.Count];
+            int nber = 0;
+            int nberData = 0;
+            int nbreVolWithAppareil = 0;
+            foreach (var item in appareils)
+            {
+                tabAppareil[nber] = item.Nom;
+                nber++;
+            }
+            var vols = _context.Vol.Where(v => v.HeureArriveReelle != null).ToList();
+            var tabData = new double[appareils.Count];
+
+            foreach (var appareil in appareils)
+            { 
+                foreach(var vol in vols)
+                {
+                    if (vol.Appareil == appareil)
+                    {
+                        tabData[nberData] += ((double)vol.NbrePersonnes / (double)vol.NombrePlace) * 100;
+                        nbreVolWithAppareil = 0;
+                    }
+                }
+                if (nbreVolWithAppareil != 0) 
+                {
+                    tabData[nberData] = Math.Round(tabData[nberData] / nbreVolWithAppareil, 1);
+                    nbreVolWithAppareil = 0;    
+                }
+                nberData++;
+                
+            }
+
+            ViewBag.Data = tabData;
+            ViewBag.ObjectName = tabAppareil;
             return View();
         }
         // GET: Chart

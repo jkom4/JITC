@@ -11,33 +11,35 @@
   }
 }
 </script>
-<h1>Create</h1>
+<h1>Creer </h1>
 
 <h4>Vol</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+
+    <div class="justify-content-center">
+        <form asp-action="Create" class="px-4 py-3">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="AeroportDepartId" class="control-label"></label>
                 <select asp-for="AeroportDepartId" class ="form-control" asp-items="ViewBag.AeroportDepartId"></select>
+                <span asp-validation-for="AeroportDepartId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="AeroportArriveId" class="control-label"></label>
                 <select asp-for="AeroportArriveId" class ="form-control" asp-items="ViewBag.AeroportArriveId"></select>
+                <span asp-validation-for="AeroportArriveId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="NombrePlace" class="control-label"></label>
                 <input asp-for="NombrePlace" class="form-control" min="1"/>
                 <span asp-validation-for="NombrePlace" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="HeureDepartPrevue" class="control-label"></label>
                 <input asp-for="HeureDepartPrevue" class="form-control" />
                 <span asp-validation-for="HeureDepartPrevue" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="HeureArrivePrevue" class="control-label"></label>
                 <input asp-for="HeureArrivePrevue" class="form-control" />
                 <span asp-validation-for="HeureArrivePrevue" class="text-danger"></span>
@@ -52,7 +54,7 @@
                 <input asp-for="HeureArriveReelle" class="form-control" />
                 <span asp-validation-for="HeureArriveReelle" class="text-danger"></span>
             </div>-->
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="PiloteId" class="control-label"></label>
                 <select asp-for="PiloteId" class ="form-control" asp-items="ViewBag.PiloteId"></select>
             </div>
@@ -61,11 +63,11 @@
                 <input asp-for="Distance" class="form-control" />
                 <span asp-validation-for="Distance" class="text-danger"></span>
             </div>-->
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="AppareilId" class="control-label"></label>
                 <select asp-for="AppareilId" class ="form-control" asp-items="ViewBag.AppareilId"></select>
             </div>
-            <div class="form-group">
+            <div class="mb-3 form-group">
                 <label asp-for="Recurrence" class="control-label"></label>
                 <br />
                 <div class="form-check form-check-inline">
@@ -104,7 +106,7 @@
                 <span asp-validation-for="Recurrence" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class=" mb-3 form-group">
                 <label asp-for="NombreMois" class="control-label">Récurrence pour X mois</label>
                 <input  asp-for="NombreMois" name="NombreMois" class ="form-control" min="0" max="12"></input>
                   <span asp-validation-for="NombreMois" class="text-danger"></span>
@@ -120,14 +122,14 @@
                 <span asp-validation-for="Raison" class="text-danger"></span>
             </div>--> 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Ajouter" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Liste vol</a>
 </div>
 
 @section Scripts {

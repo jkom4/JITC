@@ -8,85 +8,85 @@
 
 <h4>Vol</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditByPilote">
+
+    <div class=" d-flex justify-content-center">
+        <form asp-action="EditByPilote" class="px-4 py-3">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group" hidden  >
+            <div class=" md-3 form-group" hidden  >
                 <label asp-for="AeroportDepartId" class="control-label"></label>
                 <select asp-for="AeroportDepartId" class="form-control" asp-items="ViewBag.AeroportDepartId"></select>
                 <span asp-validation-for="AeroportDepartId" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class=" md-3 form-group" hidden>
                 <label asp-for="AeroportArriveId" class="control-label"></label>
                 <select asp-for="AeroportArriveId" class="form-control" asp-items="ViewBag.AeroportArriveId"></select>
                 <span asp-validation-for="AeroportArriveId" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="NombrePlace" class="control-label"></label>
                 <input asp-for="NombrePlace" class="form-control" />
                 <span asp-validation-for="NombrePlace" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="HeureDepartPrevue" class="control-label"></label>
                 <input asp-for="HeureDepartPrevue" class="form-control" />
                 <span asp-validation-for="HeureDepartPrevue" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="HeureArrivePrevue" class="control-label"></label>
                 <input asp-for="HeureArrivePrevue" class="form-control" />
                 <span asp-validation-for="HeureArrivePrevue" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="md-3 form-group">
                 <label asp-for="HeureDepartReelle" class="control-label"></label>
                 <input asp-for="HeureDepartReelle" class="form-control" />
                 <span asp-validation-for="HeureDepartReelle" class="text-danger"></span>
             </div>
-            <div class="form-group" >
+            <div class="md-3 form-group" >
                 <label asp-for="HeureArriveReelle" class="control-label"></label>
                 <input asp-for="HeureArriveReelle" class="form-control" />
                 <span asp-validation-for="HeureArriveReelle" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="PiloteId" class="control-label"></label>
                 <select asp-for="PiloteId" class="form-control" asp-items="ViewBag.PiloteId"></select>
                 <span asp-validation-for="PiloteId" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="Distance" class="control-label"></label>
                 <input asp-for="Distance" class="form-control" />
                 <span asp-validation-for="Distance" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="AppareilId" class="control-label"></label>
                 <select asp-for="AppareilId" class="form-control" asp-items="ViewBag.AppareilId"></select>
                 <span asp-validation-for="AppareilId" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden>
+            <div class="md-3 form-group" hidden>
                 <label asp-for="Recurrence" class="control-label"></label>
                 <input asp-for="Recurrence" class="form-control" />
                 <span asp-validation-for="Recurrence" class="text-danger"></span>
             </div>
-            <div class="form-group form-check" hidden>
+            <div class="md-3 form-group form-check" hidden>
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Retard" /> @Html.DisplayNameFor(model => model.Retard)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="md-3 form-group">
                 <label asp-for="Raison" class="control-label"></label>
                 <input asp-for="Raison" class="form-control" />
                 <span asp-validation-for="Raison" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="md-3 form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour a la liste</a>
 </div>
 
 @section Scripts {

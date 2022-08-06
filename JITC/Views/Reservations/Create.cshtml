@@ -8,35 +8,35 @@
 
 <h4>Reservation</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+
+    <div class="d-flex justify-content-center">
+        <form asp-action="Create" class="px-4 py-3">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" hidden>
+            <div class=" mb-3 form-group" hidden>
                 <label asp-for="Reservation.volId" class="control-label"></label>
                 <select asp-for="Reservation.volId" class ="form-control" asp-items="ViewBag.volId"></select>
             </div>
-            <div class="form-group">
+            <div class=" mb-3 form-group">
                 <label class="control-label"> @Model.Reservation.vol.AeroportDepart.Nom </label>
                 <label class="control-label"> @Model.Reservation.vol.AeroportArrive.Nom </label>
                 <label class="control-label"> @Model.Reservation.vol.HeureDepartPrevue </label>
                 
             </div>
-            <div class="form-group">
+            <div class=" mb-3 form-group">
                 <label asp-for="Reservation.place" class="control-label"></label>
                 <input asp-for="Reservation.place" class="form-control" />
                 <span asp-validation-for="Reservation.place" class="text-danger"></span>
                 <label class="control-label"> "Nombre de place disponible : " @Model.NombrePlaceDispo </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Creer" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Liste de Reservation</a>
 </div>
 
 @section Scripts {

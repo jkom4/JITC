@@ -6,6 +6,11 @@ namespace JITC.Models
 {
     public class Vol
     {
+       
+        private bool modifDate = false;
+        private DateTime heureDepartPrevue;
+        private DateTime heureArrivePrevue;
+
         [Key]
         public int Id { get; set; }
 
@@ -16,29 +21,26 @@ namespace JITC.Models
         public virtual Aeroport? AeroportDepart { get; set; }
         [DisplayName("Arrivé")]
         [ForeignKey("AeroportArriveId")]
+        [NotSameAirport("AeroportDepartId")]
         public int? AeroportArriveId { get; set; }
         [DisplayName("Arrivé")]
         public virtual Aeroport? AeroportArrive { get; set; }
 
         [DisplayName("Nombre de Place")]
         public int NombrePlace { get; set; }
-        //[DisplayFormat(DataFormatString = "{0:HH-mm}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Time)]
+        
         [DisplayName(" Date et Heure de départ")]
-        public DateTime HeureDepartPrevue { get; set; }
+        public DateTime HeureDepartPrevue { get { return heureDepartPrevue ; } set { heureDepartPrevue = value; ModifDate = true; } }
 
-       // [DisplayFormat(DataFormatString = "{0:HH-mm}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Time)]
+       
         [DisplayName("Date et Heure arrivée")]
-        public DateTime HeureArrivePrevue { get; set; }
+        [NotSameDate("HeureDepartPrevue")]
+        public DateTime HeureArrivePrevue { get { return heureArrivePrevue; } set { heureArrivePrevue = value; ModifDate = true; } }
 
-        //[DisplayFormat(DataFormatString = "{0:HH-mm}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Time)]
         [DisplayName("Date et Heure de départ reelle")]
+        
         public DateTime? HeureDepartReelle { get; set; }
 
-        //[DisplayFormat(DataFormatString = "{0:HH-mm}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Time)]
         [DisplayName("Date et Heure de arrivée reelle")]
         public DateTime? HeureArriveReelle { get; set; }
 
@@ -62,7 +64,62 @@ namespace JITC.Models
         public int? ModifVolId { get; set; }
         public virtual ModifVol? ModifVol { get; set; }
 
+        [NotMapped]
+        public int NbrePersonnes {
+            get 
+            {
+                int nbre = 0;
+                foreach(var item in Reservations) 
+                {
+                    nbre += item.place;
+                }
+                return nbre;
+            }
+        }
+        public bool ModifDate { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
     }
+
+    public class NotSameAirportAttribute : ValidationAttribute
+    {
+        public readonly string aeroportDepart;
+        
+        public string GetErrorMessage() => "l'aeroport de départ doit être différent de celui d'arrivé.";
+
+        public NotSameAirportAttribute(string aeroportDepart)
+        {
+            this.aeroportDepart = aeroportDepart;
+        }
+
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        {
+            var propertyTestedInfo = validationContext.ObjectType.GetProperty(this.aeroportDepart);
+            var propertyTestedValue = propertyTestedInfo.GetValue(validationContext.ObjectInstance, null);
+            if ((int) value == (int)propertyTestedValue)
+            {
+                return new ValidationResult(GetErrorMessage());
+            }
+            return ValidationResult.Success;
+        }
+    }
+    public class NotSameDateAttribute : ValidationAttribute
+    {
+        public NotSameDateAttribute(string date) => DateDepart = date;
+        public string DateDepart { get; }
+        public string GetErrorMessage() => "La date d'arrivé doit être superieure a celui de départ et la date courante.";
+
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        {
+            var vol = (Vol)validationContext.ObjectInstance;
+            var dateArrive = ((DateTime)value!);
+            if (vol.HeureDepartPrevue < DateTime.Now || (DateTime)dateArrive <= vol.HeureDepartPrevue)
+            {
+                return new ValidationResult(GetErrorMessage());
+            }
+            return ValidationResult.Success;
+        }
+    }
+
+
 }

@@ -2,53 +2,104 @@
     ViewData["Title"] = "Home Page";
 }
 
+@if (ViewBag.Reservations != null && ViewBag.Reservations.Count > 0)
+{
+    foreach (var reservation in ViewBag.Reservations)
+    {
+         <div class="alert alert-info">
+            <strong> Information ! </strong> l'horaire de votre voyage a été modifié  <a asp-controller="Reservations" asp-action="Details" asp-route-id="@reservation.Id">Details du vol</a>
+        </div>
+    }
+   
+    
+}
+<br />
 <div class="text-center">
     <div>
         <partial name="_SearchPartial" />
     </div>
+    <br />
+    <div>
+        <h2>A Propos de Nous</h2>
+        <p>Les routes et autoroutes belges étant de plus en plus encombrées, des opportunités de nouveaux
+        services apparaissent.
+        L’un de ceux-ci, mis en place par la just-in-time company© (JITC), consiste en une offre de transport
+        de personnes par hélicoptère.
+        La JITC a pris contact avec vous pour développer son offre internet. Vous trouverez ci-dessous les
+        user stories décrivant les fonctionnalités attendues par votre client. </p>
+    </div>
     
 
-    <a  asp-controller="Vols" asp-action="Index"> Voir tous les vols </a>
-    <div class="container mt-2">
-  <div class="row">
-      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Bruxelles">   
-        <div class="col "  style="
-        background-image: url('img/BX.jpg'); max-width: 100%; height: auto;">
-            <h2>Bruxelles</h2>
-            <p>Visitez Bruxelles</p>
-        </div>
-      </a>
-      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Liège">
-        <div class="col"
-            style="background-image: url('img/liege.jpg'); max-width: 100%; height: auto;">
-            <h2>Liège</h2>
-            <p>Visitez Liège</p>
-        </div>
-      </a> 
-      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Oostende">
-        <div class="col"
-            style="background-image: url('img/oostende.jpg');max-width: 100%; height: auto;">
-            <h2>Oostende</h2>
-            <p>Visitez Oostende</p>
-        </div>
-      </a>
-      <a  asp-controller="Vols" asp-action="Index" asp-route-airport="Charleroi">
-        <div class="col"
-            style="background-image: url('img/charleroi.png');  max-width: 100%; height: auto;">
-            <h2>Charleroi</h2>
-            <p>Visitez Charleroi</p>
-        </div>
-      </a>    
-  </div>
+          <div class="row  ">
+                
+                <div class="col-3 align-text-bottom"  style="
+                background-image: url('img/BX.jpg'); background-size : cover;">
+                <a class="link-light text-decoration-none  "  asp-controller="Vols" asp-action="Index" asp-route-airport="Bruxelles">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h2>Bruxelles</h2>
+                    <p>Visitez Bruxelles</p>
+                    </a>
+                </div>
+              
+              
+                <div class="col-3  align-text-bottom" style="background-image: url('img/liege.jpg');  background-size : cover;" >
+                    <a class="link-light text-decoration-none"  asp-controller="Vols" asp-action="Index" asp-route-airport="Liège">
+                       <br />
+                       <br />
+                       <br />
+                        <br />
+                        <br />
+                    <br />
+                    <br />
+                    <br />
+                        <h2>Liège</h2>
+                        <p>Visitez Liège</p>
+                    </a>
+                </div>
+               
+              
+                <div class="col-3  align-text-bottom"
+                    style="background-image: url('img/oostende.jpg'); background-size : cover; ">
+                    <a class="link-light text-decoration-none" asp-controller="Vols" asp-action="Index" asp-route-airport="Oostende">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h2>Oostende</h2>
+                    <p>Visitez Oostende</p>
+                    </a>
+                </div>
+              
+             
+                <div class="col-3   justify-content-end"
+                    style="background-image: url('img/charleroi.png'); background-size : cover;  ">
+                     <a class="link-light text-decoration-none" asp-controller="Vols" asp-action="Index" asp-route-airport="Charleroi">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h2>Charleroi</h2>
+                    <p>Visitez Charleroi</p>
+                    </a>
+                </div>
+                 
+          </div>
 
-  <div>
-      <h2>A Propos de Nous</h2>
-      <p>Les routes et autoroutes belges étant de plus en plus encombrées, des opportunités de nouveaux
-services apparaissent.
-L’un de ceux-ci, mis en place par la just-in-time company© (JITC), consiste en une offre de transport
-de personnes par hélicoptère.
-La JITC a pris contact avec vous pour développer son offre internet. Vous trouverez ci-dessous les
-user stories décrivant les fonctionnalités attendues par votre client. </p>
-  </div>
-</div>
+  
+
 </div>

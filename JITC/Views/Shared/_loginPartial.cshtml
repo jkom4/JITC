@@ -3,24 +3,66 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class=" navbar-nav">
+<ul class=" navbar-nav d-flex justify-content-end">
     @if(SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
+        if (User.IsInRole("Responsable"))
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " hre="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> MyJITC
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item"asp-area="Identity"asp-page="/Account/Manage/index"> <i class="bi bi-person-circle"></i> Mon profil</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Vols" asp-action="create">Creer un vol</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Appareils" asp-action="index">Appareil</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> Statistiques
+                        </a>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Vols" asp-action="Chart"> Remplissage</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Vols" asp-action="ChartRetard">Retard</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        }
+        else if (User.IsInRole("Pilote"))
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> MyJITC
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    
+                    <li><a class="dropdown-item"asp-area="Identity"asp-page="/Account/Manage/index"> <i class="bi bi-person-circle"></i> Mon profil</a></li>
+                    <li><a class="dropdown-item" asp-area="" asp-controller="Vols" asp-action="DashboardPilote">Mes vols</a></li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
            
-            <a class="nav-link" asp-area="Identity"asp-page="/Account/Manage/index"> <i class="bi bi-person-circle"></i>MyJITC</a>
-        </li>
+                <a class="nav-link " asp-area="Identity"asp-page="/Account/Manage/index"> <i class="bi bi-person-circle"></i>MyJITC</a>
+            </li>
+            
+        }
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity"asp-page="/Account/logout">Se deconnecter</a>
+                <a class="nav-link " asp-area="Identity"asp-page="/Account/logout">Se deconnecter</a>
         </li>
+       
+
     }
     else
     {
        <li class="nav-item">
-            <a class="nav-link" asp-area="Identity"  asp-page="/Account/Login">Se Connecter</a>
+            <a class="nav-link " asp-area="Identity"  asp-page="/Account/Login">Se Connecter</a>
         </li> 
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity"  asp-page="/Account/Register">S'inscrire</a>
+            <a class="nav-link " asp-area="Identity"  asp-page="/Account/Register">S'inscrire</a>
         </li> 
     }
 </ul>
