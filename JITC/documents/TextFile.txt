@@ -1,0 +1,23 @@
+﻿Responsable
+	UserName : MoNey
+	password : responsable
+
+Pilotes
+	UserName : DanieleBalav
+	password : pilote
+
+	UserName : ThierrySabine
+	password : pilote
+
+	UserName : EliCoptere
+	password : pilote
+
+Users Lambda
+	UserName : JobKom
+	password : visiteur
+
+	UserName : BlaisePascal
+	password : visiteur
+
+	UserName : JeanPierre
+	password : visiteur
