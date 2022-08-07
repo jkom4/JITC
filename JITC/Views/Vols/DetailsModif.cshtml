@@ -74,7 +74,9 @@
             </td>
             <td>
                         @{
-                            if (item.Recurrence.Length == 8)
+                            if (item.Recurrence != null)
+                            {
+                               if (item.Recurrence.Length == 8)
                             {
 
                                 <p>Tous les jours </p>
@@ -105,7 +107,9 @@
                                                 break;;
                                      }
                                 }
-                            }
+                            } 
+                            }       
+                            
                             
 
                            

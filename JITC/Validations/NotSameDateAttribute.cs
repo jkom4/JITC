@@ -11,6 +11,9 @@ namespace JITC.Validations
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            if ((DateTime)value == new DateTime()) {// pour la modification du pilote
+                return ValidationResult.Success;
+            }
             var vol = (Vol)validationContext.ObjectInstance;
             var dateArrive = ((DateTime)value!);
             if (vol.HeureDepartPrevue < DateTime.Now || (DateTime)dateArrive <= vol.HeureDepartPrevue)

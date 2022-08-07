@@ -58,7 +58,7 @@ namespace JITC.Controllers
                 .Include(v => v.AeroportDepart)
                 .Include(v => v.Appareil)
                 .Include(v => v.Pilote)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(v => v.Id == reservation.volId);
             if (reservation == null || vol == null)
             {
                 return NotFound();

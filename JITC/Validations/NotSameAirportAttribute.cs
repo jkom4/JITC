@@ -15,6 +15,10 @@ namespace JITC.Validations
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            if (value == null)
+            {// pour la modification du pilote
+                return ValidationResult.Success;
+            }
             var propertyTestedInfo = validationContext.ObjectType.GetProperty(this.aeroportDepart);
             var propertyTestedValue = propertyTestedInfo.GetValue(validationContext.ObjectInstance, null);
             if ((int)value == (int)propertyTestedValue)

@@ -219,10 +219,11 @@ namespace JITC.Migrations
                     PiloteId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Distance = table.Column<double>(type: "float", nullable: true),
                     AppareilId = table.Column<int>(type: "int", nullable: false),
-                    Recurrence = table.Column<int>(type: "int", nullable: false),
+                    Recurrence = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Retard = table.Column<bool>(type: "bit", nullable: false),
                     Raison = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModifVolId = table.Column<int>(type: "int", nullable: true)
+                    ModifVolId = table.Column<int>(type: "int", nullable: true),
+                    ModifDate = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -306,8 +307,8 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "28a25804-325c-4e30-8ad5-b59cb03dcfc9", "Responsable", "RESPONSABLE" },
-                    { "2", "383fc3d4-3c30-4708-bcbf-0169df6ec82a", "Pilote", "PILOTE" }
+                    { "1", "ec0598de-8669-42dd-8202-8398fa97b205", "Responsable", "RESPONSABLE" },
+                    { "2", "0404bb6d-96de-4681-82b3-bcb5733c0adf", "Pilote", "PILOTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -315,10 +316,25 @@ namespace JITC.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Birthdate", "ConcurrencyStamp", "Email", "EmailConfirmed", "Firstname", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "99193783-2351-4d5d-b62a-0ab78d180302", "M.Ney@jitc.com", false, "Mo", false, null, "Ney", "M.NEY@JITC.COM", "MONEY", "AQAAAAEAACcQAAAAEAonfFh1FBmaxnRvEoDYwq7LT5amFqDhBXeiX1ho63MIa53RnjB0eosSRqsNJPlhGQ==", null, false, "124a5455-86dc-4a35-8412-919d7767d589", false, "MoNey" },
-                    { "2", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "e4837413-88df-4bae-9915-08982f0259b0", "D.Balav@jitc.com", false, "Daniele", false, null, "Balav", "D.BALAV@JITC.COM", "DANIELEBALAV", "AQAAAAEAACcQAAAAEGs0VHcXuQhhYRgRcHK//Ew8ECCpPPg4LEqZVuXl/9HeI9y19UHniHVuWPZfeg8khg==", null, false, "00d889df-f590-427a-be5d-39b166ab8db1", false, "DanieleBalav" },
-                    { "3", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "091d4bea-728f-42f9-b2b6-ceabe21b5694", "T.Sabine@jitc.com", false, "Thierry", false, null, "Sabine", "T.SABINE@JITC.COM", "THIERRYSABINE", "AQAAAAEAACcQAAAAEAc4lEWc6X9jGkvq+Nvx3gZQOGZ1hq7dlKef4BOF4gfEO7paVx58F19rmUOT7kIBDA==", null, false, "176cf282-2eea-4f28-9c7b-21ec40e67cb0", false, "ThierrySabine" },
-                    { "4", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "a3c61fb5-fb5d-4cc2-8a25-d8e64e798ebf", "E.Coptere@jitc.com", false, "Eli", false, null, "Copetre", "E.COPTERE@JITC.COM", "ELICOPTERE", "AQAAAAEAACcQAAAAEFvBp+uy6syDes29WB9Y8W7HXfTsEpSa573+iWllTj+DYlwy0lmkpoiLUGnzvAlFBw==", null, false, "15503496-2002-443d-9459-f9f8276b31a8", false, "EliCoptere" }
+                    { "1", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bfd621df-08a9-4e32-9976-bb31b6350660", "M.Ney@jitc.com", false, "Mo", false, null, "Ney", "M.NEY@JITC.COM", "MONEY", "AQAAAAEAACcQAAAAEG4dPiUnzaW2a3ANPnkmJFPZ+XeXjD3DWjVxMcsvG3O7/kA3V0yYvJKlyrthCXMKsA==", null, false, "38e6b073-be5f-4bff-b564-6efc68a722bd", false, "MoNey" },
+                    { "2", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "7391aa83-072d-40ac-bf6e-aebedc52eb27", "D.Balav@jitc.com", false, "Daniele", false, null, "Balav", "D.BALAV@JITC.COM", "DANIELEBALAV", "AQAAAAEAACcQAAAAELgvc7vEdEI8oRXc0iPXD7jpXrIZw2/k1cILLPyWWZYkR8DtGJCNhxwuCrX3K1b+Nw==", null, false, "5a863584-3d98-43c3-9746-367c8d90b5fd", false, "DanieleBalav" },
+                    { "3", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "237241f0-989b-46ae-9f58-ec3225cf021a", "T.Sabine@jitc.com", false, "Thierry", false, null, "Sabine", "T.SABINE@JITC.COM", "THIERRYSABINE", "AQAAAAEAACcQAAAAEM7m5qZCPNA9ADmMUReIsnx1zDLNXz+EMOe/ljSEMUJz0VO9gH3tzZA230/gu+oWHQ==", null, false, "6ce9ce10-e137-41fa-b623-b1dd0dd6f94b", false, "ThierrySabine" },
+                    { "4", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "4f555741-7712-4a3c-af5d-ba7ebaf86f6f", "E.Coptere@jitc.com", false, "Eli", false, null, "Copetre", "E.COPTERE@JITC.COM", "ELICOPTERE", "AQAAAAEAACcQAAAAEBEVLbjM/iWfIb/JbFIY7T6Y1lrttIvzthP6hN5TeRq2gHRkG68SLf2veFW8J5BdgQ==", null, false, "677be91e-3d05-4751-88f7-f7d6a7476f51", false, "EliCoptere" },
+                    { "5", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "05882b94-95a7-4f8c-9502-878a2e414a30", "JobKom@jitc.com", false, "Job", false, null, "Kom", "JOBKOM@JITC.COM", "JOBKOM", "AQAAAAEAACcQAAAAENrMnuMV/x81KdY95D6DSfFtCg03hDd7cMYpAnpvuT5Qr9UVcwWIBFKeIhq6Ds7pLQ==", null, false, "4d647222-14ff-48c1-896e-f988da79cd7a", false, "JobKom" },
+                    { "6", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "5501706c-0e77-4bb0-8f92-4e316d045dcf", "BlaisePascal@jitc.com", false, "Blaise", false, null, "Pascal", "BLAISEPASCAL@JITC.COM", "BLAISEPASCAL", "AQAAAAEAACcQAAAAEGy6wuL7IIZgPvwc8I7eC3Uq0E/0VX1fX1AenjcUmqImnwAq09NSVfjo+t2KbYhSgQ==", null, false, "42fc187a-f115-412f-9611-2026f90c5cd3", false, "BlaisePascal" },
+                    { "7", 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "6c2733c4-5725-4619-8f08-0a6ee81d099c", "JeanPierre@jitc.com", false, "Jean", false, null, "Pierre", "JEANPIERRE@JITC.COM", "JEANPIERRE", "AQAAAAEAACcQAAAAEOC0MpFsTXrb/e91ENq6FCNyVEKQizTpRo8jDB/kT33LlXE/vJ0C7H9Hs1wJxuVRhQ==", null, false, "43ef880b-b9cf-401e-a3a3-956771aa792e", false, "JeanPierre" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ModifVol",
+                columns: new[] { "Id", "VolModifs" },
+                values: new object[,]
+                {
+                    { 1, "[\"{\\\"IdVol\\\":1,\\\"Vol\\\":\\\"Liège - Bruxelles\\\",\\\"Depart\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Liège\\\",\\\"Latitude\\\":50.63583079,\\\"Longitude\\\":5.439331576},\\\"Arrive\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"DepartPrevue\\\":\\\"2022-08-01T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-01T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":10,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Eurocopter AS 355 F1/F2 Ecureuil III\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":5,\\\"Vitesse\\\":220.0,\\\"Moteur\\\":\\\"Deux turbines du modèle de Rolls Royce 250-C20F\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]" },
+                    { 2, "[\"{\\\"IdVol\\\":2,\\\"Vol\\\":\\\"Bruxelles - Liège\\\",\\\"Depart\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"Arrive\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Liège\\\",\\\"Latitude\\\":50.63583079,\\\"Longitude\\\":5.439331576},\\\"DepartPrevue\\\":\\\"2022-08-07T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-07T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":10,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Eurocopter AS 355 F1/F2 Ecureuil III\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":5,\\\"Vitesse\\\":220.0,\\\"Moteur\\\":\\\"Deux turbines du modèle de Rolls Royce 250-C20F\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]" },
+                    { 3, "[\"{\\\"IdVol\\\":3,\\\"Vol\\\":\\\"Liège - Oostende\\\",\\\"Depart\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Liège\\\",\\\"Latitude\\\":50.63583079,\\\"Longitude\\\":5.439331576},\\\"Arrive\\\":{\\\"Id\\\":3,\\\"Nom\\\":\\\"Oostende\\\",\\\"Latitude\\\":51.193165894,\\\"Longitude\\\":2.858163234},\\\"DepartPrevue\\\":\\\"2022-08-15T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-15T11:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":5,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bell 206 JetRanger\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":4,\\\"Vitesse\\\":190.0,\\\"Moteur\\\":\\\"Une turbine du type Rolls Royce 250-C20B\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]" },
+                    { 4, "[\"{\\\"IdVol\\\":4,\\\"Vol\\\":\\\"Bruxelles - Charleroi\\\",\\\"Depart\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"Arrive\\\":{\\\"Id\\\":4,\\\"Nom\\\":\\\"Charleroi\\\",\\\"Latitude\\\":50.455998176,\\\"Longitude\\\":4.45166486},\\\"DepartPrevue\\\":\\\"2022-08-16T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-16T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":15,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":3,\\\"Nom\\\":\\\"Robinson R44 Raven II\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":3,\\\"Vitesse\\\":190.0,\\\"Moteur\\\":\\\"Un piston du type Lycoming modèle IO-540\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]" },
+                    { 5, "[\"{\\\"IdVol\\\":5,\\\"Vol\\\":\\\"Charleroi - Bruxelles\\\",\\\"Depart\\\":{\\\"Id\\\":4,\\\"Nom\\\":\\\"Charleroi\\\",\\\"Latitude\\\":50.455998176,\\\"Longitude\\\":4.45166486},\\\"Arrive\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"DepartPrevue\\\":\\\"2022-08-17T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-17T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":6,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":3,\\\"Nom\\\":\\\"Robinson R44 Raven II\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":3,\\\"Vitesse\\\":190.0,\\\"Moteur\\\":\\\"Un piston du type Lycoming modèle IO-540\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]" }
                 });
 
             migrationBuilder.InsertData(
@@ -330,6 +346,30 @@ namespace JITC.Migrations
                     { "2", "2" },
                     { "2", "3" },
                     { "2", "4" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Vol",
+                columns: new[] { "Id", "AeroportArriveId", "AeroportDepartId", "AppareilId", "Distance", "HeureArrivePrevue", "HeureArriveReelle", "HeureDepartPrevue", "HeureDepartReelle", "ModifDate", "ModifVolId", "NombrePlace", "PiloteId", "Raison", "Recurrence", "Retard" },
+                values: new object[,]
+                {
+                    { 1, 2, 1, 1, 29.515449800117239, new DateTime(2022, 8, 1, 10, 2, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 1, 11, 2, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 1, 8, 2, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 1, 8, 2, 0, 0, DateTimeKind.Unspecified), true, 1, 10, "2", "Mauvais temps", null, true },
+                    { 2, 1, 2, 1, 29.515449800117239, new DateTime(2022, 8, 7, 10, 2, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 1, 10, 2, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 7, 8, 2, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 8, 1, 8, 2, 0, 0, DateTimeKind.Unspecified), true, 2, 10, "2", null, null, false },
+                    { 3, 3, 1, 2, 49.515449800117239, new DateTime(2022, 8, 15, 11, 2, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2022, 8, 15, 8, 2, 0, 0, DateTimeKind.Unspecified), null, true, 3, 5, "3", null, null, false },
+                    { 4, 4, 2, 3, 49.515449800117239, new DateTime(2022, 8, 16, 10, 2, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2022, 8, 16, 8, 2, 0, 0, DateTimeKind.Unspecified), null, true, 4, 15, "4", null, null, false },
+                    { 5, 2, 4, 3, 59.515449800117239, new DateTime(2022, 8, 17, 10, 2, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2022, 8, 17, 8, 2, 0, 0, DateTimeKind.Unspecified), null, true, 5, 6, "3", null, null, false }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reservation",
+                columns: new[] { "Id", "UserId", "place", "volId" },
+                values: new object[,]
+                {
+                    { 1, "5", 5, 1 },
+                    { 2, "6", 10, 2 },
+                    { 3, "5", 5, 3 },
+                    { 4, "7", 10, 4 },
+                    { 5, "6", 5, 5 }
                 });
 
             migrationBuilder.CreateIndex(

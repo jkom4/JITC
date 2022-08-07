@@ -25,7 +25,8 @@ namespace JITC.Controllers
 
         // GET: Vols
         public async Task<IActionResult> Index(int? DepartId, int? ArriveId, DateTime? DepartDate, string? airport)
-        {
+        {   if (TempData["Notif"] != null) { ViewBag.Notif = TempData["Notif"].ToString(); }
+            
             if (DepartId != null && ArriveId != null && DepartDate != null)
             {
                 var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote)
@@ -40,6 +41,7 @@ namespace JITC.Controllers
             }
             else
             {
+                
                 var jITCDbContext = _context.Vol.Include(v => v.AeroportArrive).Include(v => v.AeroportDepart).Include(v => v.Appareil).Include(v => v.Pilote).Where(v => v.HeureDepartPrevue >= DateTime.Now);
                 return View(await jITCDbContext.ToListAsync());
             }
@@ -106,15 +108,15 @@ namespace JITC.Controllers
                 Aeroport Depart = await _context.Aeroport.Where(a => a.Id == vol.AeroportDepartId).FirstOrDefaultAsync();
                 Aeroport Arrive = await _context.Aeroport.Where(a => a.Id == vol.AeroportArriveId).FirstOrDefaultAsync();
                 vol.Distance = getDistanceFromLatLonInKm(Depart.Latitude, Depart.Longitude, Arrive.Latitude, Arrive.Longitude);
-                
-                if (Recurrence != null)
+                vol.Recurrence = JsonConvert.SerializeObject(Recurrence);
+                if (Recurrence.Length > 0)
                 {
                     createReccurence(Recurrence, vol);//on cree la recurrence avec les vols
                 }
                 else
                 { 
                     _context.Vol.Add(vol);
-
+                  
                     ModifVol modifVol = new ModifVol();
                     VolViewModel volViewModel = CreateViewModel(vol, _context);
                     modifVol.VolModifs.Add(CreateModifObject(volViewModel));
@@ -154,7 +156,7 @@ namespace JITC.Controllers
             var volsValid = new List<Vol>();
             var modifValid = new List<ModifVol>();
             int nber = 0;
-            vol.Recurrence = JsonConvert.SerializeObject(Recurrence);
+            
             for (int i = 0; i < vol.NombreMois; i++)
             {
                 foreach (var jour in Recurrence)
@@ -364,7 +366,7 @@ namespace JITC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditByPilote(int id, [Bind("Id,AeroportDepartId,AeroportArriveId,NombrePlace,HeureDepartPrevue,HeureArrivePrevue,HeureDepartReelle,HeureArriveReelle,PiloteId,Distance,AppareilId,Recurrence,Retard,Raison")] Vol vol)
+        public async Task<IActionResult> EditByPilote(int id, [Bind("Id,HeureDepartReelle,HeureArriveReelle,Retard,Raison")] Vol vol)
         {
             if (id != vol.Id)
             {
@@ -373,11 +375,11 @@ namespace JITC.Controllers
 
             if (ModelState.IsValid)
             {
-
+                var volDb = _context.Vol.Find(id);
                 if (vol.HeureDepartReelle != null || vol.HeureArriveReelle != null)
                 {
 
-                    if(vol.HeureArriveReelle != null && vol.HeureArriveReelle > vol.HeureArrivePrevue && vol.Raison == null)
+                    if(vol.HeureArriveReelle != null && vol.HeureArriveReelle > volDb.HeureArrivePrevue && vol.Raison == null)
                     {
                         
                         ModelState.AddModelError("", "Un retard a été constaté Vous devez renseigner la raison ");
@@ -404,7 +406,11 @@ namespace JITC.Controllers
                     try
                     {
                         if (vol.HeureArriveReelle > vol.HeureArrivePrevue) { vol.Retard = true; }
-                        _context.Update(vol);
+                        volDb.HeureDepartReelle = vol.HeureDepartReelle;
+                        volDb.HeureArriveReelle = vol.HeureArriveReelle;
+                        volDb.Retard = vol.Retard;
+                        volDb.Raison = vol.Raison;
+                        _context.Update(volDb);
 
 
                         await _context.SaveChangesAsync();
@@ -488,6 +494,7 @@ namespace JITC.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["Notif"] = "Vol supprimé avec succès";
             return RedirectToAction(nameof(Index));
         }
 
@@ -564,7 +571,7 @@ namespace JITC.Controllers
                 tabAppareil[nber] = item.Nom;
                 nber++;
             }
-            var vols = _context.Vol.Where(v => v.HeureArriveReelle != null).ToList();
+            var vols = _context.Vol.Include(v=> v.Reservations).Where(v => v.HeureArriveReelle != null).ToList();
             var tabData = new double[appareils.Count];
 
             foreach (var appareil in appareils)
@@ -574,7 +581,7 @@ namespace JITC.Controllers
                     if (vol.Appareil == appareil)
                     {
                         tabData[nberData] += ((double)vol.NbrePersonnes / (double)vol.NombrePlace) * 100;
-                        nbreVolWithAppareil = 0;
+                        nbreVolWithAppareil ++;
                     }
                 }
                 if (nbreVolWithAppareil != 0) 

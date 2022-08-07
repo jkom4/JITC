@@ -57,7 +57,7 @@
             </td>
           
                 <td>@{
-                        if (item.HeureArriveReelle == null)
+                        if (item.HeureArriveReelle != null)
                         {
                             <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                         }

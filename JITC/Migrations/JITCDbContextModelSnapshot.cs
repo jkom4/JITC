@@ -228,7 +228,7 @@ namespace JITC.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "e99f6dd1-0411-413b-a635-d9f103cbf5be",
+                            ConcurrencyStamp = "bfd621df-08a9-4e32-9976-bb31b6350660",
                             Email = "M.Ney@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Mo",
@@ -236,9 +236,9 @@ namespace JITC.Migrations
                             Name = "Ney",
                             NormalizedEmail = "M.NEY@JITC.COM",
                             NormalizedUserName = "MONEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJFzcKoE/5pSlp9BsVrSy+bPZiFKdmBwtDot4w0G4yUS4n3JgK2vCUtHpZnjeRxtHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG4dPiUnzaW2a3ANPnkmJFPZ+XeXjD3DWjVxMcsvG3O7/kA3V0yYvJKlyrthCXMKsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "02ad75b7-286f-4b39-95d4-4600d630256d",
+                            SecurityStamp = "38e6b073-be5f-4bff-b564-6efc68a722bd",
                             TwoFactorEnabled = false,
                             UserName = "MoNey"
                         },
@@ -247,7 +247,7 @@ namespace JITC.Migrations
                             Id = "2",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "51957ab5-1fd4-4b18-9851-5acbbea23f27",
+                            ConcurrencyStamp = "7391aa83-072d-40ac-bf6e-aebedc52eb27",
                             Email = "D.Balav@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Daniele",
@@ -255,9 +255,9 @@ namespace JITC.Migrations
                             Name = "Balav",
                             NormalizedEmail = "D.BALAV@JITC.COM",
                             NormalizedUserName = "DANIELEBALAV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFy7iVZdtkm3EMe5dN0Qe7ELRSo+V0aO9sI/CMiaZcgoa9OFX3mFbhm9IWTcDVgrtw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELgvc7vEdEI8oRXc0iPXD7jpXrIZw2/k1cILLPyWWZYkR8DtGJCNhxwuCrX3K1b+Nw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8a40540f-d5df-4c91-9c35-a743ac6f4022",
+                            SecurityStamp = "5a863584-3d98-43c3-9746-367c8d90b5fd",
                             TwoFactorEnabled = false,
                             UserName = "DanieleBalav"
                         },
@@ -266,7 +266,7 @@ namespace JITC.Migrations
                             Id = "3",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0a5015ba-cb60-4aac-a40c-15da7b82dd6e",
+                            ConcurrencyStamp = "237241f0-989b-46ae-9f58-ec3225cf021a",
                             Email = "T.Sabine@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Thierry",
@@ -274,9 +274,9 @@ namespace JITC.Migrations
                             Name = "Sabine",
                             NormalizedEmail = "T.SABINE@JITC.COM",
                             NormalizedUserName = "THIERRYSABINE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFakq+Go468tz8oWoSnjNH3Kj3aR5XPnB0W8zq1RnemrCHc5CQEImRnCh2Z2WNRfTg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM7m5qZCPNA9ADmMUReIsnx1zDLNXz+EMOe/ljSEMUJz0VO9gH3tzZA230/gu+oWHQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e05b768-e370-4726-b313-d02ee1783fd9",
+                            SecurityStamp = "6ce9ce10-e137-41fa-b623-b1dd0dd6f94b",
                             TwoFactorEnabled = false,
                             UserName = "ThierrySabine"
                         },
@@ -285,7 +285,7 @@ namespace JITC.Migrations
                             Id = "4",
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "2acd78a6-05ed-447d-99c9-3d826e98add5",
+                            ConcurrencyStamp = "4f555741-7712-4a3c-af5d-ba7ebaf86f6f",
                             Email = "E.Coptere@jitc.com",
                             EmailConfirmed = false,
                             Firstname = "Eli",
@@ -293,11 +293,68 @@ namespace JITC.Migrations
                             Name = "Copetre",
                             NormalizedEmail = "E.COPTERE@JITC.COM",
                             NormalizedUserName = "ELICOPTERE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJRJD9ainIk7SYMT96+BoSxHeCv4F9fYOaeGvJCh9BmMxgmj0wSANX/6TPHwGwdSrQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBEVLbjM/iWfIb/JbFIY7T6Y1lrttIvzthP6hN5TeRq2gHRkG68SLf2veFW8J5BdgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "aed6f51f-7001-45ac-b04a-2c0160decc4e",
+                            SecurityStamp = "677be91e-3d05-4751-88f7-f7d6a7476f51",
                             TwoFactorEnabled = false,
                             UserName = "EliCoptere"
+                        },
+                        new
+                        {
+                            Id = "5",
+                            AccessFailedCount = 0,
+                            Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "05882b94-95a7-4f8c-9502-878a2e414a30",
+                            Email = "JobKom@jitc.com",
+                            EmailConfirmed = false,
+                            Firstname = "Job",
+                            LockoutEnabled = false,
+                            Name = "Kom",
+                            NormalizedEmail = "JOBKOM@JITC.COM",
+                            NormalizedUserName = "JOBKOM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENrMnuMV/x81KdY95D6DSfFtCg03hDd7cMYpAnpvuT5Qr9UVcwWIBFKeIhq6Ds7pLQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4d647222-14ff-48c1-896e-f988da79cd7a",
+                            TwoFactorEnabled = false,
+                            UserName = "JobKom"
+                        },
+                        new
+                        {
+                            Id = "6",
+                            AccessFailedCount = 0,
+                            Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "5501706c-0e77-4bb0-8f92-4e316d045dcf",
+                            Email = "BlaisePascal@jitc.com",
+                            EmailConfirmed = false,
+                            Firstname = "Blaise",
+                            LockoutEnabled = false,
+                            Name = "Pascal",
+                            NormalizedEmail = "BLAISEPASCAL@JITC.COM",
+                            NormalizedUserName = "BLAISEPASCAL",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGy6wuL7IIZgPvwc8I7eC3Uq0E/0VX1fX1AenjcUmqImnwAq09NSVfjo+t2KbYhSgQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "42fc187a-f115-412f-9611-2026f90c5cd3",
+                            TwoFactorEnabled = false,
+                            UserName = "BlaisePascal"
+                        },
+                        new
+                        {
+                            Id = "7",
+                            AccessFailedCount = 0,
+                            Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "6c2733c4-5725-4619-8f08-0a6ee81d099c",
+                            Email = "JeanPierre@jitc.com",
+                            EmailConfirmed = false,
+                            Firstname = "Jean",
+                            LockoutEnabled = false,
+                            Name = "Pierre",
+                            NormalizedEmail = "JEANPIERRE@JITC.COM",
+                            NormalizedUserName = "JEANPIERRE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOC0MpFsTXrb/e91ENq6FCNyVEKQizTpRo8jDB/kT33LlXE/vJ0C7H9Hs1wJxuVRhQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "43ef880b-b9cf-401e-a3a3-956771aa792e",
+                            TwoFactorEnabled = false,
+                            UserName = "JeanPierre"
                         });
                 });
 
@@ -316,6 +373,33 @@ namespace JITC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ModifVol");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            VolModifs = "[\"{\\\"IdVol\\\":1,\\\"Vol\\\":\\\"Liège - Bruxelles\\\",\\\"Depart\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Liège\\\",\\\"Latitude\\\":50.63583079,\\\"Longitude\\\":5.439331576},\\\"Arrive\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"DepartPrevue\\\":\\\"2022-08-01T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-01T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":10,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Eurocopter AS 355 F1/F2 Ecureuil III\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":5,\\\"Vitesse\\\":220.0,\\\"Moteur\\\":\\\"Deux turbines du modèle de Rolls Royce 250-C20F\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            VolModifs = "[\"{\\\"IdVol\\\":2,\\\"Vol\\\":\\\"Bruxelles - Liège\\\",\\\"Depart\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"Arrive\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Liège\\\",\\\"Latitude\\\":50.63583079,\\\"Longitude\\\":5.439331576},\\\"DepartPrevue\\\":\\\"2022-08-07T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-07T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":10,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Eurocopter AS 355 F1/F2 Ecureuil III\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":5,\\\"Vitesse\\\":220.0,\\\"Moteur\\\":\\\"Deux turbines du modèle de Rolls Royce 250-C20F\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            VolModifs = "[\"{\\\"IdVol\\\":3,\\\"Vol\\\":\\\"Liège - Oostende\\\",\\\"Depart\\\":{\\\"Id\\\":1,\\\"Nom\\\":\\\"Liège\\\",\\\"Latitude\\\":50.63583079,\\\"Longitude\\\":5.439331576},\\\"Arrive\\\":{\\\"Id\\\":3,\\\"Nom\\\":\\\"Oostende\\\",\\\"Latitude\\\":51.193165894,\\\"Longitude\\\":2.858163234},\\\"DepartPrevue\\\":\\\"2022-08-15T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-15T11:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":5,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bell 206 JetRanger\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":4,\\\"Vitesse\\\":190.0,\\\"Moteur\\\":\\\"Une turbine du type Rolls Royce 250-C20B\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            VolModifs = "[\"{\\\"IdVol\\\":4,\\\"Vol\\\":\\\"Bruxelles - Charleroi\\\",\\\"Depart\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"Arrive\\\":{\\\"Id\\\":4,\\\"Nom\\\":\\\"Charleroi\\\",\\\"Latitude\\\":50.455998176,\\\"Longitude\\\":4.45166486},\\\"DepartPrevue\\\":\\\"2022-08-16T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-16T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":15,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":3,\\\"Nom\\\":\\\"Robinson R44 Raven II\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":3,\\\"Vitesse\\\":190.0,\\\"Moteur\\\":\\\"Un piston du type Lycoming modèle IO-540\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            VolModifs = "[\"{\\\"IdVol\\\":5,\\\"Vol\\\":\\\"Charleroi - Bruxelles\\\",\\\"Depart\\\":{\\\"Id\\\":4,\\\"Nom\\\":\\\"Charleroi\\\",\\\"Latitude\\\":50.455998176,\\\"Longitude\\\":4.45166486},\\\"Arrive\\\":{\\\"Id\\\":2,\\\"Nom\\\":\\\"Bruxelles\\\",\\\"Latitude\\\":50.90082973,\\\"Longitude\\\":4.483998064},\\\"DepartPrevue\\\":\\\"2022-08-17T08:02:00\\\",\\\"ArrivePrevue\\\":\\\"2022-08-17T10:02:00\\\",\\\"DepartReelle\\\":null,\\\"ArriveReelle\\\":null,\\\"NombrePlace\\\":6,\\\"NombrePlaceDispo\\\":0,\\\"Pilote\\\":null,\\\"Appareil\\\":{\\\"Id\\\":3,\\\"Nom\\\":\\\"Robinson R44 Raven II\\\",\\\"Description\\\":\\\"\\\",\\\"Capacite_Cab\\\":3,\\\"Vitesse\\\":190.0,\\\"Moteur\\\":\\\"Un piston du type Lycoming modèle IO-540\\\",\\\"Statut\\\":false,\\\"Vols\\\":[]},\\\"Recurrence\\\":null,\\\"Reservation\\\":null,\\\"Reservations\\\":null,\\\"vols\\\":null}\"]"
+                        });
                 });
 
             modelBuilder.Entity("JITC.Models.Reservation", b =>
@@ -342,6 +426,43 @@ namespace JITC.Migrations
                     b.HasIndex("volId");
 
                     b.ToTable("Reservation");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            UserId = "5",
+                            place = 5,
+                            volId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            UserId = "6",
+                            place = 10,
+                            volId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            UserId = "5",
+                            place = 5,
+                            volId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            UserId = "7",
+                            place = 10,
+                            volId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            UserId = "6",
+                            place = 5,
+                            volId = 5
+                        });
                 });
 
             modelBuilder.Entity("JITC.Models.Vol", b =>
@@ -392,7 +513,6 @@ namespace JITC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Recurrence")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Retard")
@@ -411,6 +531,88 @@ namespace JITC.Migrations
                     b.HasIndex("PiloteId");
 
                     b.ToTable("Vol");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AeroportArriveId = 2,
+                            AeroportDepartId = 1,
+                            AppareilId = 1,
+                            Distance = 29.515449800117239,
+                            HeureArrivePrevue = new DateTime(2022, 8, 1, 10, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureArriveReelle = new DateTime(2022, 8, 1, 11, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartPrevue = new DateTime(2022, 8, 1, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartReelle = new DateTime(2022, 8, 1, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            ModifDate = true,
+                            ModifVolId = 1,
+                            NombrePlace = 10,
+                            PiloteId = "2",
+                            Raison = "Mauvais temps",
+                            Retard = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AeroportArriveId = 1,
+                            AeroportDepartId = 2,
+                            AppareilId = 1,
+                            Distance = 29.515449800117239,
+                            HeureArrivePrevue = new DateTime(2022, 8, 7, 10, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureArriveReelle = new DateTime(2022, 8, 1, 10, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartPrevue = new DateTime(2022, 8, 7, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartReelle = new DateTime(2022, 8, 1, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            ModifDate = true,
+                            ModifVolId = 2,
+                            NombrePlace = 10,
+                            PiloteId = "2",
+                            Retard = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AeroportArriveId = 3,
+                            AeroportDepartId = 1,
+                            AppareilId = 2,
+                            Distance = 49.515449800117239,
+                            HeureArrivePrevue = new DateTime(2022, 8, 15, 11, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartPrevue = new DateTime(2022, 8, 15, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            ModifDate = true,
+                            ModifVolId = 3,
+                            NombrePlace = 5,
+                            PiloteId = "3",
+                            Retard = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AeroportArriveId = 4,
+                            AeroportDepartId = 2,
+                            AppareilId = 3,
+                            Distance = 49.515449800117239,
+                            HeureArrivePrevue = new DateTime(2022, 8, 16, 10, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartPrevue = new DateTime(2022, 8, 16, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            ModifDate = true,
+                            ModifVolId = 4,
+                            NombrePlace = 15,
+                            PiloteId = "4",
+                            Retard = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AeroportArriveId = 2,
+                            AeroportDepartId = 4,
+                            AppareilId = 3,
+                            Distance = 59.515449800117239,
+                            HeureArrivePrevue = new DateTime(2022, 8, 17, 10, 2, 0, 0, DateTimeKind.Unspecified),
+                            HeureDepartPrevue = new DateTime(2022, 8, 17, 8, 2, 0, 0, DateTimeKind.Unspecified),
+                            ModifDate = true,
+                            ModifVolId = 5,
+                            NombrePlace = 6,
+                            PiloteId = "3",
+                            Retard = false
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -443,14 +645,14 @@ namespace JITC.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "1fb58b5b-2b88-4bf1-a75f-02d52ac70d01",
+                            ConcurrencyStamp = "ec0598de-8669-42dd-8202-8398fa97b205",
                             Name = "Responsable",
                             NormalizedName = "RESPONSABLE"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "0c8cd044-2cd6-4f81-9382-1ed23c514389",
+                            ConcurrencyStamp = "0404bb6d-96de-4681-82b3-bcb5733c0adf",
                             Name = "Pilote",
                             NormalizedName = "PILOTE"
                         });

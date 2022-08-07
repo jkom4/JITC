@@ -33,7 +33,7 @@ namespace JITC.Controllers
             if (_context.Appareil != null) {
                 foreach( var appareil in  _context.Appareil.Include(a => a.Vols).ToList())
                 {
-                    if (appareil.Vols.Count % 5 == 0 && appareil.Vols.Count != 0)
+                    if (appareil.Vols.Where(v=>v.HeureArriveReelle != null).ToList().Count > 5 )
                     {
                         appareil.Statut = true;
                     }
@@ -179,7 +179,7 @@ namespace JITC.Controllers
             RefreshStatut();
             Appareil appareil = await _context.Appareil.Where(a => a.Id == id).Include(a => a.Vols).FirstAsync();
             appareil.Statut = false;
-
+            ViewBag.Notif = "Appareil en ordre !";
             return _context.Appareil != null ?
                         View("index",await _context.Appareil.Include(a => a.Vols).ToListAsync()) :
                         Problem("Entity set 'JITCDbContext.Appareil'  is null.");
