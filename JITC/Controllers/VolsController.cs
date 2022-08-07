@@ -99,56 +99,32 @@ namespace JITC.Controllers
         public async Task<IActionResult> Create(string[] Recurrence,[Bind("Id,AeroportDepartId,AeroportArriveId,NombrePlace,HeureDepartPrevue,HeureArrivePrevue,HeureDepartReelle,HeureArriveReelle,PiloteId,Distance,AppareilId,Recurrence,NombreMois,Retard,Raison")] Vol vol)
         {
             
-                vol.Recurrence = JsonConvert.SerializeObject(Recurrence);
+                
               if (ModelState.IsValid)
-              {
+            {
 
                 Aeroport Depart = await _context.Aeroport.Where(a => a.Id == vol.AeroportDepartId).FirstOrDefaultAsync();
                 Aeroport Arrive = await _context.Aeroport.Where(a => a.Id == vol.AeroportArriveId).FirstOrDefaultAsync();
                 vol.Distance = getDistanceFromLatLonInKm(Depart.Latitude, Depart.Longitude, Arrive.Latitude, Arrive.Longitude);
-                var volsValid = new List<Vol>();
-                var modifValid = new List<ModifVol>();
-                int nber = 0;
-                for (int i = 0; i < vol.NombreMois; i++) 
+                
+                if (Recurrence != null)
                 {
-                    foreach (var jour in Recurrence) 
-                    {
-                        var jours = GetDates(DateTime.Now.Year, DateTime.Now.Month + i).Where(j => j.DayOfWeek.ToString() == jour);
-                        foreach (var jr in jours)
-                        {
-                            if (jr > DateTime.Now)
-                            {
-                                var vol1 = new Vol();
-                                vol1.AeroportDepartId = vol.AeroportDepartId;
-                                vol1.AeroportArriveId = vol.AeroportArriveId;
-                                vol1.AppareilId = vol.AppareilId;
-                                vol1.Distance = vol.Distance;
-                                vol1.NombreMois = vol.NombreMois;
-                                vol1.NombrePlace = vol.NombrePlace;
-                                vol1.PiloteId = vol.PiloteId;
-                                vol1.Recurrence = vol.Recurrence;
+                    createReccurence(Recurrence, vol);//on cree la recurrence avec les vols
+                }
+                else
+                { 
+                    _context.Vol.Add(vol);
 
-                                DateTime departDate = jr.AddHours(vol.HeureDepartPrevue.Hour).AddMinutes(vol.HeureDepartPrevue.Minute).AddSeconds(vol.HeureDepartPrevue.Second);
-                                DateTime arriveDate = jr.AddHours(vol.HeureArrivePrevue.Hour).AddMinutes(vol.HeureArrivePrevue.Minute).AddSeconds(vol.HeureArrivePrevue.Second);
-                                vol1.HeureDepartPrevue = departDate;
-                                vol1.HeureArrivePrevue = arriveDate;
+                    ModifVol modifVol = new ModifVol();
+                    VolViewModel volViewModel = CreateViewModel(vol, _context);
+                    modifVol.VolModifs.Add(CreateModifObject(volViewModel));
+                    vol.ModifVol = modifVol;
 
-                                ModifVol modifVol = new ModifVol();
-                                VolViewModel volViewModel = CreateViewModel(vol1, _context);
-                                modifVol.VolModifs.Add(CreateModifObject(volViewModel));
-                                vol1.ModifVol = modifVol;
-                                
-                                modifValid.Add(modifVol);
-                                
-                                volsValid.Add(vol1);
-                            }
-                        }
-                    }
+                    _context.ModifVol.Add(modifVol);
                 }
 
-                _context.Vol.AddRange(volsValid);
-                _context.ModifVol.AddRange(modifValid);
                 
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -172,6 +148,53 @@ namespace JITC.Controllers
                                                 .Where(x => x.RoleName == "Pilote"), "Id", "Name", vol.PiloteId);
             return View(vol);
         }
+
+        private void createReccurence(string[] Recurrence, Vol vol)
+        {
+            var volsValid = new List<Vol>();
+            var modifValid = new List<ModifVol>();
+            int nber = 0;
+            vol.Recurrence = JsonConvert.SerializeObject(Recurrence);
+            for (int i = 0; i < vol.NombreMois; i++)
+            {
+                foreach (var jour in Recurrence)
+                {
+                    var jours = GetDates(DateTime.Now.Year, DateTime.Now.Month + i).Where(j => j.DayOfWeek.ToString() == jour);
+                    foreach (var jr in jours)
+                    {
+                        if (jr > DateTime.Now)
+                        {
+                            var vol1 = new Vol();
+                            vol1.AeroportDepartId = vol.AeroportDepartId;
+                            vol1.AeroportArriveId = vol.AeroportArriveId;
+                            vol1.AppareilId = vol.AppareilId;
+                            vol1.Distance = vol.Distance;
+                            vol1.NombreMois = vol.NombreMois;
+                            vol1.NombrePlace = vol.NombrePlace;
+                            vol1.PiloteId = vol.PiloteId;
+                            vol1.Recurrence = vol.Recurrence;
+
+                            DateTime departDate = jr.AddHours(vol.HeureDepartPrevue.Hour).AddMinutes(vol.HeureDepartPrevue.Minute).AddSeconds(vol.HeureDepartPrevue.Second);
+                            DateTime arriveDate = jr.AddHours(vol.HeureArrivePrevue.Hour).AddMinutes(vol.HeureArrivePrevue.Minute).AddSeconds(vol.HeureArrivePrevue.Second);
+                            vol1.HeureDepartPrevue = departDate;
+                            vol1.HeureArrivePrevue = arriveDate;
+
+                            ModifVol modifVol = new ModifVol();
+                            VolViewModel volViewModel = CreateViewModel(vol1, _context);
+                            modifVol.VolModifs.Add(CreateModifObject(volViewModel));
+                            vol1.ModifVol = modifVol;
+
+                            modifValid.Add(modifVol);
+
+                            volsValid.Add(vol1);
+                        }
+                    }
+                }
+            }
+            _context.Vol.AddRange(volsValid);
+            _context.ModifVol.AddRange(modifValid);
+        }
+
         public static List<DateTime> GetDates(int year, int month)
         {
             return Enumerable.Range(1, DateTime.DaysInMonth(year, month))  // Days: 1, 2 ... 31 etc.

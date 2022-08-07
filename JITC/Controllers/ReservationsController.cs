@@ -229,6 +229,13 @@ namespace JITC.Controllers
             {
                 return NotFound();
             }
+            VolViewModel viewModel = CreateViewModel(reservation, vol);
+
+            return View(viewModel);
+        }
+
+        private static VolViewModel CreateViewModel(Reservation? reservation, Vol? vol)
+        {
             var viewModel = new VolViewModel();
             viewModel.IdVol = vol.Id;
             viewModel.Appareil = vol.Appareil;
@@ -240,9 +247,7 @@ namespace JITC.Controllers
             viewModel.DepartReelle = vol.HeureDepartReelle;
             viewModel.ArriveReelle = vol.HeureArriveReelle;
             viewModel.Reservation = reservation;
-           
-
-            return View(viewModel);
+            return viewModel;
         }
 
         // POST: Reservations/Delete/5
@@ -263,7 +268,24 @@ namespace JITC.Controllers
             }
             else
             {
-                return Problem("Vous ne pouvez pas annuler a moins de 24H");
+                
+
+                
+                var vol = await _context.Vol
+                   .Include(v => v.AeroportArrive)
+                   .Include(v => v.AeroportDepart)
+                   .Include(v => v.Appareil)
+                   .Include(v => v.Pilote)
+                   .Include(v => v.Reservations)
+                   .FirstOrDefaultAsync(m => m.Id == reservation.volId);
+                if (reservation == null || vol == null)
+                {
+                    return NotFound();
+                }
+                VolViewModel viewModel = CreateViewModel(reservation, vol);
+                ViewBag.Problem = "Vous ne pouvez pas annuler a moins de 24H";
+                return View(viewModel);
+                
             }
             
         }

@@ -1,13 +1,14 @@
-﻿using System.ComponentModel;
+﻿using JITC.Validations;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JITC.Models
-{
+{   
+
     public class Vol
     {
-       
-        private bool modifDate = false;
+     
         private DateTime heureDepartPrevue;
         private DateTime heureArrivePrevue;
 
@@ -43,7 +44,7 @@ namespace JITC.Models
 
         [DisplayName("Date et Heure de arrivée reelle")]
         public DateTime? HeureArriveReelle { get; set; }
-
+        [Pilote]
         [ForeignKey("PiloteId")]
         [DisplayName("Pilote")]
         public string? PiloteId { get; set; }
@@ -55,7 +56,7 @@ namespace JITC.Models
         public int AppareilId { get; set; }
         public virtual Appareil? Appareil { get; set; }
 
-        public string Recurrence { get; set; }
+        public string? Recurrence { get; set; }
         [NotMapped]
         public int NombreMois { get; set; }
         [DefaultValue(false)]
@@ -81,45 +82,6 @@ namespace JITC.Models
 
     }
 
-    public class NotSameAirportAttribute : ValidationAttribute
-    {
-        public readonly string aeroportDepart;
-        
-        public string GetErrorMessage() => "l'aeroport de départ doit être différent de celui d'arrivé.";
-
-        public NotSameAirportAttribute(string aeroportDepart)
-        {
-            this.aeroportDepart = aeroportDepart;
-        }
-
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
-        {
-            var propertyTestedInfo = validationContext.ObjectType.GetProperty(this.aeroportDepart);
-            var propertyTestedValue = propertyTestedInfo.GetValue(validationContext.ObjectInstance, null);
-            if ((int) value == (int)propertyTestedValue)
-            {
-                return new ValidationResult(GetErrorMessage());
-            }
-            return ValidationResult.Success;
-        }
-    }
-    public class NotSameDateAttribute : ValidationAttribute
-    {
-        public NotSameDateAttribute(string date) => DateDepart = date;
-        public string DateDepart { get; }
-        public string GetErrorMessage() => "La date d'arrivé doit être superieure a celui de départ et la date courante.";
-
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
-        {
-            var vol = (Vol)validationContext.ObjectInstance;
-            var dateArrive = ((DateTime)value!);
-            if (vol.HeureDepartPrevue < DateTime.Now || (DateTime)dateArrive <= vol.HeureDepartPrevue)
-            {
-                return new ValidationResult(GetErrorMessage());
-            }
-            return ValidationResult.Success;
-        }
-    }
 
 
 }
